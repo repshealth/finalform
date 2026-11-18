@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final Form Physique | The app from IFBB Pro Dallas Botchway</title>
+<meta name="description" content="Training, nutrition and weekly check-ins in one app, written by IFBB Pro Dallas Botchway. Built for men who put the work in and want the physique to show it.">
+<meta name="theme-color" content="#0A0A0A">
+
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Final Form Physique">
+<meta property="og:title" content="Final Form Physique | The app from IFBB Pro Dallas Botchway">
+<meta property="og:description" content="Training, nutrition and weekly check-ins in one app, written by IFBB Pro Dallas Botchway.">
+<meta property="og:image" content="images/photos/trophy.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+html, body { margin: 0; padding: 0; background: #0A0A0A; }
+html { scroll-behavior: smooth; }
+
+/* ===================================================================
+   FINAL FORM PHYSIQUE  |  stylesheet
+   Colours come from the FF logo: black, white and the logo red.
+   =================================================================== */
+
+#ff-page {
+  --ff-red: #BD3C2C;
+  --ff-red-dark: #9C2F21;
+  --ff-red-glow: rgba(189, 60, 44, 0.35);
+  --ff-red-soft: rgba(189, 60, 44, 0.14);
+  --ff-black: #0A0A0A;
+  --ff-ink: #111111;
+  --ff-card: #161616;
+  --ff-card-2: #1C1C1C;
+  --ff-white: #FFFFFF;
+  --ff-text: #EDEDED;
+  --ff-muted: #9B9B9B;
+  --ff-line: rgba(255, 255, 255, 0.10);
+
+  --ff-shell: 1240px;
+  --ff-r-lg: 26px;
+  --ff-r-md: 18px;
+
+  position: relative;
+  overflow-x: hidden;
+  background: var(--ff-black);
+  color: var(--ff-text);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#ff-page *, #ff-page *::before, #ff-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+#ff-page img { max-width: 100%; display: block; }
+
+#ff-page .ff-shell { width: 100%; max-width: var(--ff-shell); margin: 0 auto; padding-inline: 32px; }
+
+/* ─── Type ───────────────────────────────────────────────────── */
+
+#ff-page .ff-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ff-red);
+  margin-bottom: 1.1rem;
+}
+#ff-page .ff-label::before { content: ""; width: 22px; height: 2px; background: var(--ff-red); }
+
+#ff-page .ff-h1, #ff-page .ff-h2, #ff-page .ff-h3 {
+  font-family: 'Oswald', 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  line-height: 0.98;
+  font-weight: 700;
+  color: var(--ff-white);
+}
+#ff-page .thin { font-weight: 300; }
+#ff-page .red { color: var(--ff-red); }
+
+#ff-page .ff-h1 { font-size: clamp(2.8rem, 5.8vw, 5rem); }
+#ff-page .ff-h2 { font-size: clamp(2rem, 4vw, 3.4rem); }
+#ff-page .ff-h3 { font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.15; }
+
+#ff-page .ff-lead { font-size: 1.04rem; line-height: 1.7; color: #CFCFCF; max-width: 48ch; }
+#ff-page .ff-note { font-size: 0.95rem; line-height: 1.7; color: var(--ff-muted); }
+
+#ff-page .ff-head-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+#ff-page .ff-head-split .ff-note { max-width: 42ch; justify-self: end; }
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+
+#ff-page .ff-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1.05rem 2.2rem;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s, color .18s, border-color .18s, transform .18s, box-shadow .18s;
+}
+#ff-page .ff-btn-solid { background: var(--ff-red); color: #fff; box-shadow: 0 12px 30px -10px var(--ff-red-glow); }
+#ff-page .ff-btn-solid:hover { background: var(--ff-red-dark); transform: translateY(-2px); }
+#ff-page .ff-btn-line { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); }
+#ff-page .ff-btn-line:hover { border-color: #fff; background: #fff; color: var(--ff-black); }
+#ff-page .ff-btn-white { background: #fff; color: var(--ff-black); }
+#ff-page .ff-btn-white:hover { background: var(--ff-red); color: #fff; }
+#ff-page .ff-btn-sm { padding: 0.72rem 1.5rem; font-size: 0.75rem; }
+
+#ff-page .ff-micro {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ff-muted);
+}
+
+/* ─── Nav ────────────────────────────────────────────────────── */
+
+#ff-page .ff-nav-wrap { position: sticky; top: 0; z-index: 90; padding: 18px 32px 0; }
+#ff-page .ff-nav {
+  max-width: var(--ff-shell);
+  margin: 0 auto;
+  background: rgba(14,14,14,0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--ff-line);
+  border-radius: 100px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 10px 10px 22px;
+}
+#ff-page .ff-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+#ff-page .ff-brand img { height: 30px; width: auto; }
+#ff-page .ff-brand span {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+#ff-page .ff-nav-links { display: flex; gap: 30px; list-style: none; }
+#ff-page .ff-nav-links a { font-size: 0.85rem; font-weight: 600; color: #CFCFCF; text-decoration: none; transition: color .18s; }
+#ff-page .ff-nav-links a:hover { color: var(--ff-red); }
+
+/* ─── Hero ───────────────────────────────────────────────────── */
+
+#ff-page .ff-hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 70% at 78% 30%, rgba(189,60,44,0.28) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(189,60,44,0.10) 0%, transparent 70%),
+    var(--ff-black);
+  padding: 56px 0 0;
+  overflow: hidden;
+}
+/* the logo's triangle, huge and faint, behind the hero */
+#ff-page .ff-hero::before {
+  content: "";
+  position: absolute;
+  right: -8%;
+  top: -6%;
+  width: 760px;
+  height: 640px;
+  border: 2px solid rgba(255,255,255,0.05);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 70%);
+  pointer-events: none;
+}
+#ff-page .ff-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  padding-bottom: 56px;
+}
+#ff-page .ff-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--ff-line);
+  border-radius: 100px;
+  padding: 7px 18px 7px 8px;
+  margin-bottom: 1.8rem;
+}
+#ff-page .ff-proof-mark {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--ff-red);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+#ff-page .ff-proof-mark svg { width: 15px; height: 15px; fill: #fff; }
+#ff-page .ff-proof-text { font-size: 0.8rem; font-weight: 700; color: #fff; }
+#ff-page .ff-proof-rule { width: 1px; height: 18px; background: var(--ff-line); }
+
+#ff-page .ff-hero h1 { margin-bottom: 1.4rem; }
+#ff-page .ff-hero .ff-lead { margin-bottom: 2.2rem; }
+#ff-page .ff-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 1.1rem; }
+
+#ff-page .ff-hero-visual { position: relative; min-height: 600px; }
+#ff-page .ff-hero-photo {
+  position: absolute;
+  inset: 0 0 0 22%;
+  border-radius: var(--ff-r-lg);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--ff-line);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.6);
+}
+#ff-page .ff-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+#ff-page .ff-hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(10,10,10,0.75) 100%);
+}
+#ff-page .ff-hero-badge {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  background: rgba(10,10,10,0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ff-line);
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #fff;
+}
+#ff-page .ff-hero-badge b { display: block; font-family: 'Oswald', sans-serif; font-size: 1.15rem; text-transform: uppercase; color: var(--ff-red); letter-spacing: 0.02em; }
+
+#ff-page .ff-phone {
+  border-radius: 28px;
+  overflow: hidden;
+  background: #000;
+  border: 5px solid #1E1E1E;
+  outline: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+#ff-page .ff-phone img { width: 100%; aspect-ratio: 440 / 956; object-fit: cover; }
+#ff-page .ff-hero-phone { position: absolute; width: 186px; }
+#ff-page .ff-hero-phone-a { left: 0; bottom: 6%; transform: rotate(-7deg); z-index: 2; }
+#ff-page .ff-hero-phone-b { left: 19%; bottom: 26%; transform: rotate(4.5deg); width: 160px; z-index: 1; }
+
+/* ─── Marquee ────────────────────────────────────────────────── */
+
+#ff-page .ff-marquee {
+  background: var(--ff-red);
+  color: #fff;
+  transform: rotate(-1.6deg) scale(1.05);
+  margin: 0 0 86px;
+  padding: 18px 0;
+  overflow: hidden;
+}
+#ff-page .ff-marquee-row {
+  display: flex;
+  gap: 46px;
+  align-items: center;
+  white-space: nowrap;
+  animation: ff-slide 34s linear infinite;
+  width: max-content;
+}
+@keyframes ff-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+#ff-page .ff-marquee-item {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#ff-page .ff-marquee-item b { font-weight: 700; }
+#ff-page .ff-marquee-tri { width: 12px; height: 10px; background: #fff; clip-path: polygon(0 0, 100% 0, 50% 100%); opacity: .85; }
+@media (prefers-reduced-motion: reduce) { #ff-page .ff-marquee-row { animation: none; } }
+
+/* ─── Sections ───────────────────────────────────────────────── */
+
+#ff-page .ff-sec { padding: 100px 0; }
+#ff-page .ff-sec-alt { background: var(--ff-ink); border-top: 1px solid var(--ff-line); border-bottom: 1px solid var(--ff-line); }
+
+/* ─── About ──────────────────────────────────────────────────── */
+
+#ff-page .ff-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+#ff-page .ff-about-copy p + p { margin-top: 1.1rem; }
+#ff-page .ff-statrow {
+  display: flex;
+  gap: 44px;
+  flex-wrap: wrap;
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ff-line);
+}
+#ff-page .ff-stat-num { font-family: 'Oswald', sans-serif; font-size: 1.9rem; font-weight: 700; line-height: 1; color: #fff; text-transform: uppercase; }
+#ff-page .ff-stat-lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ff-muted); margin-top: 6px; }
+
+#ff-page .ff-phone-cluster { position: relative; min-height: 540px; }
+#ff-page .ff-phone-cluster .ff-phone { position: absolute; width: 220px; }
+#ff-page .ff-pc-1 { left: 0; top: 46px; transform: rotate(-5deg); }
+#ff-page .ff-pc-2 { left: 29%; top: 0; z-index: 2; }
+#ff-page .ff-pc-3 { right: 0; top: 60px; transform: rotate(5deg); }
+#ff-page .ff-phone-cluster::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 420px; height: 420px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ff-red-glow) 0%, transparent 68%);
+}
+
+/* ─── What's inside ──────────────────────────────────────────── */
+
+#ff-page .ff-inside-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 72px; align-items: center; }
+#ff-page .ff-inside-sub { margin-top: 1.1rem; max-width: 44ch; }
+
+#ff-page .ff-acc { margin-top: 2.2rem; border-top: 1px solid var(--ff-line); }
+#ff-page .ff-acc-item { border-bottom: 1px solid var(--ff-line); }
+#ff-page .ff-acc-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 19px 2px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ff-muted);
+  transition: color .18s;
+}
+#ff-page .ff-acc-q:hover, #ff-page .ff-acc-item.open .ff-acc-q { color: #fff; }
+#ff-page .ff-acc-ico { width: 26px; height: 26px; flex-shrink: 0; color: #5E5E5E; transition: color .18s; }
+#ff-page .ff-acc-ico svg { width: 100%; height: 100%; display: block; }
+#ff-page .ff-acc-item.open .ff-acc-ico, #ff-page .ff-acc-q:hover .ff-acc-ico { color: var(--ff-red); }
+#ff-page .ff-acc-q .t { flex: 1; line-height: 1.2; }
+#ff-page .ff-acc-tog { flex-shrink: 0; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 400; line-height: 1; transition: transform .22s; }
+#ff-page .ff-acc-item.open .ff-acc-tog { transform: rotate(45deg); color: var(--ff-red); }
+#ff-page .ff-acc-a { display: none; padding: 0 2px 22px 42px; }
+#ff-page .ff-acc-item.open .ff-acc-a { display: block; }
+#ff-page .ff-acc-a p { font-size: 0.93rem; line-height: 1.7; color: #BDBDBD; max-width: 52ch; }
+
+#ff-page .ff-inside-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 2.2rem; }
+
+#ff-page .ff-inside-visual { position: relative; display: flex; align-items: center; justify-content: center; padding: 24px 0; }
+#ff-page .ff-blob {
+  position: absolute;
+  width: 440px; height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(189,60,44,0.45) 0%, rgba(189,60,44,0.08) 55%, transparent 70%);
+}
+#ff-page .ff-inside-visual .ff-phone { position: relative; z-index: 1; width: 272px; border-radius: 34px; }
+#ff-page .ff-chip {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  color: var(--ff-black);
+  border-radius: 100px;
+  padding: 11px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+}
+#ff-page .ff-chip svg { width: 17px; height: 17px; color: var(--ff-red); flex-shrink: 0; }
+#ff-page .ff-chip-a { top: 16%; left: -2%; }
+#ff-page .ff-chip-b { bottom: 18%; right: 0; }
+
+/* ─── Photo strip ────────────────────────────────────────────── */
+
+#ff-page .ff-strip { overflow: hidden; padding: 6px 0 0; }
+#ff-page .ff-strip-row {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: ff-slide 60s linear infinite;
+}
+#ff-page .ff-strip:hover .ff-strip-row { animation-play-state: paused; }
+#ff-page .ff-strip-row figure {
+  flex: 0 0 auto;
+  width: 280px;
+  height: 380px;
+  border-radius: var(--ff-r-md);
+  overflow: hidden;
+  border: 1px solid var(--ff-line);
+  background: #000;
+}
+#ff-page .ff-strip-row img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15) contrast(1.05); transition: transform .5s, filter .5s; }
+#ff-page .ff-strip-row figure:hover img { transform: scale(1.04); filter: none; }
+@media (prefers-reduced-motion: reduce) { #ff-page .ff-strip-row { animation: none; } #ff-page .ff-strip { overflow-x: auto; } }
+
+/* ─── App showcase ───────────────────────────────────────────── */
+
+#ff-page .ff-screens { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 10px 0 30px; }
+#ff-page .ff-screens::-webkit-scrollbar { display: none; }
+#ff-page .ff-arc { display: flex; align-items: flex-start; justify-content: center; gap: 20px; width: max-content; margin: 0 auto; padding-inline: 32px; }
+#ff-page .ff-arc .ff-phone { flex: 0 0 auto; scroll-snap-align: center; border-radius: 30px; }
+#ff-page .ff-arc-out    { width: 188px; margin-top: 64px; }
+#ff-page .ff-arc-mid    { width: 202px; margin-top: 28px; }
+#ff-page .ff-arc-centre { width: 232px; margin-top: 0; outline: 2px solid var(--ff-red) !important; }
+
+#ff-page .ff-pills { display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; max-width: 940px; margin: 10px auto 0; }
+#ff-page .ff-pill {
+  border: 1.5px solid var(--ff-line);
+  border-radius: 100px;
+  padding: 11px 22px;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: #DADADA;
+  background: var(--ff-card);
+}
+#ff-page .ff-pill-on { background: var(--ff-red-soft); border-color: rgba(189,60,44,0.55); color: #fff; }
+
+/* ─── Pricing ────────────────────────────────────────────────── */
+
+#ff-page .ff-centred { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+#ff-page .ff-centred .ff-label { justify-content: center; }
+#ff-page .ff-centred .ff-note { margin: 1.1rem auto 0; max-width: 54ch; }
+
+#ff-page .ff-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: start; }
+#ff-page .ff-plan { position: relative; background: var(--ff-card); border: 1px solid var(--ff-line); border-radius: var(--ff-r-lg); overflow: hidden; }
+#ff-page .ff-plan-pop { border: 2px solid var(--ff-red); background: linear-gradient(180deg, rgba(189,60,44,0.16), var(--ff-card) 60%); }
+#ff-page .ff-plan-body { padding: 28px 28px 30px; }
+#ff-page .ff-plan-pop .ff-plan-body { padding-top: 48px; }
+#ff-page .ff-plan-tag { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ff-muted); margin-bottom: 0.7rem; }
+#ff-page .ff-plan-price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+#ff-page .ff-plan-amt { font-family: 'Oswald', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1; color: #fff; }
+#ff-page .ff-plan-per { font-size: 0.86rem; color: var(--ff-muted); }
+#ff-page .ff-plan-day {
+  display: inline-block;
+  background: var(--ff-red-soft);
+  color: #fff;
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 14px 0 20px;
+}
+#ff-page .ff-plan .ff-btn { width: 100%; }
+#ff-page .ff-plan-note { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--ff-line); font-size: 0.85rem; color: var(--ff-muted); text-align: center; line-height: 1.6; }
+#ff-page .ff-popular {
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--ff-red);
+  color: #fff;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+#ff-page .ff-trust { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 36px; font-size: 0.86rem; color: var(--ff-muted); }
+#ff-page .ff-trust span { display: flex; align-items: center; gap: 9px; }
+#ff-page .ff-tick { width: 19px; height: 19px; border-radius: 50%; background: var(--ff-red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+#ff-page .ff-tick svg { width: 10px; height: 10px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ─── Meet Dallas ────────────────────────────────────────────── */
+
+#ff-page .ff-coach { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 64px; align-items: center; }
+#ff-page .ff-coach-photos { position: relative; padding-bottom: 60px; }
+#ff-page .ff-coach-photo { border-radius: var(--ff-r-lg); overflow: hidden; border: 1px solid var(--ff-line); box-shadow: 0 32px 66px rgba(0,0,0,0.55); width: 82%; }
+#ff-page .ff-coach-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+#ff-page .ff-coach-inset {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 44%;
+  border-radius: var(--ff-r-md);
+  overflow: hidden;
+  border: 4px solid var(--ff-black);
+  outline: 2px solid var(--ff-red);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.6);
+}
+#ff-page .ff-coach-inset img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 30%; }
+#ff-page .ff-coach-copy p + p { margin-top: 1.1rem; }
+#ff-page .ff-creds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 2.2rem; }
+#ff-page .ff-cred { background: var(--ff-card); border: 1px solid var(--ff-line); border-radius: var(--ff-r-md); padding: 18px 16px; }
+#ff-page .ff-cred .ff-stat-num { font-size: 1.35rem; }
+#ff-page .ff-cred .ff-stat-num.red { color: var(--ff-red); }
+
+/* ─── Founding members ───────────────────────────────────────── */
+
+#ff-page .ff-founding {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 0;
+  border-radius: var(--ff-r-lg);
+  overflow: hidden;
+  border: 1px solid var(--ff-line);
+  background: var(--ff-card);
+}
+#ff-page .ff-founding-copy { padding: 56px 52px; }
+#ff-page .ff-founding-copy .ff-note { margin-top: 1.1rem; max-width: 46ch; }
+#ff-page .ff-founding-list { list-style: none; margin: 1.8rem 0 2rem; display: grid; gap: 12px; }
+#ff-page .ff-founding-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; color: #DADADA; }
+#ff-page .ff-founding-list .ff-tick { margin-top: 3px; }
+#ff-page .ff-founding-photo { position: relative; min-height: 420px; }
+#ff-page .ff-founding-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+#ff-page .ff-founding-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--ff-card) 0%, transparent 30%); }
+
+/* ─── FAQ ────────────────────────────────────────────────────── */
+
+#ff-page .ff-faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 64px; align-items: start; }
+#ff-page .ff-faq-list { border-top: 1px solid var(--ff-line); }
+#ff-page .ff-faq-item { border-bottom: 1px solid var(--ff-line); transition: background .2s; }
+#ff-page .ff-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 4px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+#ff-page .ff-faq-n { font-size: 0.7rem; font-weight: 800; color: var(--ff-red); letter-spacing: 0.1em; flex-shrink: 0; width: 24px; }
+#ff-page .ff-faq-q .t { flex: 1; }
+#ff-page .ff-faq-ico {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ff-line);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--ff-red);
+  transition: background .2s, color .2s, transform .2s;
+}
+#ff-page .ff-faq-item.open .ff-faq-ico { background: var(--ff-red); border-color: var(--ff-red); color: #fff; transform: rotate(45deg); }
+#ff-page .ff-faq-a { display: none; padding: 0 22px 24px 64px; }
+#ff-page .ff-faq-item.open .ff-faq-a { display: block; }
+#ff-page .ff-faq-a p { font-size: 0.94rem; line-height: 1.72; color: #BDBDBD; }
+#ff-page .ff-faq-item.open { background: var(--ff-card); border-radius: var(--ff-r-md); }
+#ff-page .ff-faq-item.open .ff-faq-q { padding-inline: 22px; }
+
+/* ─── Quiz + lead capture ────────────────────────────────────── */
+
+#ff-page .ff-capture {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 80% at 10% 50%, rgba(255,255,255,0.10) 0%, transparent 60%),
+    var(--ff-red);
+  color: #fff;
+  padding: 96px 0;
+  overflow: hidden;
+}
+#ff-page .ff-capture::before {
+  content: "";
+  position: absolute;
+  right: -140px; bottom: -200px;
+  width: 560px; height: 480px;
+  background: rgba(0,0,0,0.10);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+#ff-page .ff-capture-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 56px; align-items: center; }
+#ff-page .ff-capture .ff-label { color: #fff; }
+#ff-page .ff-capture .ff-label::before { background: #fff; }
+#ff-page .ff-capture h2 { margin-bottom: 1.1rem; }
+#ff-page .ff-capture-copy p { color: rgba(255,255,255,0.88); max-width: 44ch; line-height: 1.7; }
+
+#ff-page .ff-card {
+  position: relative;
+  background: var(--ff-black);
+  color: var(--ff-text);
+  border-radius: var(--ff-r-lg);
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+#ff-page .ff-quiz-dots { display: flex; gap: 7px; margin-bottom: 22px; }
+#ff-page .ff-quiz-dot { width: 30px; height: 4px; border-radius: 100px; background: rgba(255,255,255,0.14); transition: background .25s; }
+#ff-page .ff-quiz-dot.on { background: var(--ff-red); }
+#ff-page .ff-card.done .ff-quiz-dots { visibility: hidden; }
+
+#ff-page .ff-quiz-step { display: none; }
+#ff-page .ff-quiz-step.active { display: block; animation: ffQuizIn .3s ease both; }
+@keyframes ffQuizIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+#ff-page .ff-quiz-q { font-family: 'Oswald', sans-serif; font-size: clamp(1.15rem, 1.7vw, 1.4rem); font-weight: 700; text-transform: uppercase; line-height: 1.2; color: #fff; margin: 0 0 20px; }
+#ff-page .ff-quiz-sub { font-size: 0.8rem; line-height: 1.55; color: var(--ff-muted); margin: -14px 0 20px; padding-bottom: 16px; border-bottom: 1px solid var(--ff-line); }
+#ff-page .ff-quiz-opts { display: grid; gap: 10px; }
+#ff-page .ff-quiz-opt {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.95rem 1.2rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--ff-line);
+  background: var(--ff-card);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+#ff-page .ff-quiz-opt:hover { border-color: var(--ff-red); background: var(--ff-red-soft); transform: translateX(3px); }
+#ff-page .ff-quiz-opt.on { border-color: var(--ff-red); background: var(--ff-red); }
+#ff-page .ff-quiz-back { appearance: none; background: none; border: 0; margin-top: 20px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--ff-muted); cursor: pointer; }
+#ff-page .ff-quiz-back:hover { color: var(--ff-red); }
+
+#ff-page .ff-field { margin-bottom: 14px; }
+#ff-page .ff-card label { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ff-muted); margin-bottom: 8px; }
+#ff-page .ff-opt { color: #666; margin-left: 6px; }
+#ff-page .ff-card input {
+  width: 100%;
+  padding: 0.92rem 1.2rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--ff-line);
+  background: var(--ff-card);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: #fff;
+  outline: none;
+  transition: border-color .2s;
+}
+#ff-page .ff-card input::placeholder { color: #6A6A6A; }
+#ff-page .ff-card input:focus { border-color: var(--ff-red); }
+#ff-page .ff-card input.ff-bad { border-color: #FF6B5A; }
+#ff-page .ff-trap { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none; }
+#ff-page .ff-go { width: 100%; margin-top: 6px; }
+#ff-page .ff-go[disabled] { opacity: 0.6; pointer-events: none; }
+#ff-page .ff-small { font-size: 0.78rem; color: var(--ff-muted); text-align: center; margin-top: 14px; }
+
+#ff-page .ff-result { text-align: center; }
+#ff-page .ff-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ff-red-soft);
+  border: 1px solid rgba(189,60,44,0.5);
+  border-radius: 100px;
+  padding: 7px 15px;
+  margin-bottom: 18px;
+}
+#ff-page .ff-badge svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+#ff-page .ff-result .ff-h3 { margin-bottom: 0.7rem; }
+#ff-page .ff-summary { font-size: 0.85rem; color: var(--ff-muted); margin-bottom: 12px; }
+#ff-page .ff-why { font-size: 0.86rem; line-height: 1.65; color: #BDBDBD; margin: 0 auto 22px; max-width: 34ch; }
+#ff-page .ff-qprice { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-bottom: 20px; }
+#ff-page .ff-qamt { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 4vw, 2.9rem); font-weight: 700; line-height: 1; color: #fff; }
+#ff-page .ff-qper { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ff-muted); }
+#ff-page .ff-result .ff-btn { width: 100%; }
+
+#ff-page .ff-wa {
+  margin-top: 10px;
+  background: #25D366; color: #fff;
+  box-shadow: 0 8px 22px -8px rgba(37, 211, 102, .65);
+  white-space: nowrap;
+}
+#ff-page .ff-wa:hover { background: #1EBE5A; transform: translateY(-2px); }
+#ff-page .ff-wa svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+
+#ff-page footer { background: #050505; color: #fff; padding: 76px 0 30px; border-top: 1px solid var(--ff-line); }
+#ff-page .ff-foot-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 44px; padding-bottom: 48px; }
+#ff-page .ff-foot-brand .ff-brand { margin-bottom: 1.2rem; }
+#ff-page .ff-foot-brand .ff-brand img { height: 40px; }
+#ff-page .ff-foot-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 34ch; }
+#ff-page .ff-foot-col h4 { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1.1rem; }
+#ff-page .ff-foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+#ff-page .ff-foot-col a { font-size: 0.9rem; color: rgba(255,255,255,0.78); text-decoration: none; transition: color .18s; }
+#ff-page .ff-foot-col a:hover { color: var(--ff-red); }
+#ff-page .ff-wordmark {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 11vw, 9.4rem);
+  font-weight: 700;
+  line-height: 0.85;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.06);
+  text-align: center;
+  padding: 26px 0 10px;
+  user-select: none;
+  white-space: nowrap;
+}
+#ff-page .ff-foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.42);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 1040px) {
+  #ff-page .ff-nav-links { display: none; }
+
+  #ff-page .ff-hero-grid,
+  #ff-page .ff-about-grid,
+  #ff-page .ff-inside-grid,
+  #ff-page .ff-coach,
+  #ff-page .ff-faq-grid,
+  #ff-page .ff-capture-grid,
+  #ff-page .ff-founding { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  #ff-page .ff-founding { gap: 0; }
+  #ff-page .ff-founding-photo { min-height: 360px; order: -1; }
+  #ff-page .ff-founding-photo::after { background: linear-gradient(0deg, var(--ff-card) 0%, transparent 35%); }
+  #ff-page .ff-head-split { grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; margin-bottom: 40px; }
+  #ff-page .ff-head-split .ff-note { justify-self: start; }
+
+  #ff-page .ff-hero-visual { width: 100%; max-width: 560px; margin: 0 auto; min-height: 0; aspect-ratio: 1 / 1.02; }
+  #ff-page .ff-phone-cluster { width: 100%; max-width: 520px; margin: 0 auto; min-height: 0; aspect-ratio: 1 / 1; }
+  #ff-page .ff-phone-cluster .ff-phone { width: 42%; }
+  #ff-page .ff-coach-photos { max-width: 520px; width: 100%; margin: 0 auto; }
+
+  #ff-page .ff-plans { grid-template-columns: minmax(0, 1fr); max-width: 480px; margin: 0 auto; gap: 18px; }
+  #ff-page .ff-foot-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 28px; }
+  #ff-page .ff-foot-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  #ff-page .ff-shell { padding-inline: 20px; }
+  #ff-page .ff-nav-wrap { padding: 12px 14px 0; }
+  #ff-page .ff-nav { padding: 8px 8px 8px 14px; gap: 10px; }
+  #ff-page .ff-brand img { height: 26px; }
+  #ff-page .ff-brand span { font-size: 0.86rem; letter-spacing: 0.1em; }
+
+  #ff-page .ff-sec { padding: 68px 0; }
+  #ff-page .ff-h1 { font-size: clamp(2.6rem, 12vw, 3.4rem); }
+  #ff-page .ff-h2 { font-size: clamp(2rem, 9vw, 2.5rem); }
+  #ff-page .ff-lead { font-size: 0.98rem; }
+
+  #ff-page .ff-hero { padding-top: 32px; }
+  #ff-page .ff-hero::before { width: 420px; height: 360px; right: -30%; }
+  #ff-page .ff-hero-grid { gap: 36px; padding-bottom: 48px; }
+  #ff-page .ff-hero-btns { flex-direction: column; align-items: stretch; gap: 10px; }
+  #ff-page .ff-hero-btns .ff-btn { width: 100%; }
+  #ff-page .ff-hero .ff-micro { display: block; text-align: center; }
+  #ff-page .ff-hero-visual { aspect-ratio: 1 / 1.12; }
+  #ff-page .ff-hero-photo { inset: 0 0 0 24%; border-radius: 22px; }
+  #ff-page .ff-hero-phone { width: 40%; }
+  #ff-page .ff-hero-phone-b { width: 35%; left: 22%; bottom: 28%; }
+  #ff-page .ff-hero-phone .ff-phone, #ff-page .ff-phone { border-radius: 20px; border-width: 4px; }
+  #ff-page .ff-hero-badge { right: 10px; bottom: 10px; padding: 9px 12px; font-size: 0.66rem; }
+  #ff-page .ff-hero-badge b { font-size: 0.95rem; }
+
+  #ff-page .ff-proof { padding: 6px 14px 6px 6px; gap: 9px; margin-bottom: 1.4rem; }
+  #ff-page .ff-proof-text { font-size: 0.72rem; white-space: nowrap; }
+  #ff-page .ff-proof-rule, #ff-page .ff-proof-text + .ff-proof-rule + .ff-proof-text { display: none; }
+
+  #ff-page .ff-marquee { margin: 0 0 60px; padding: 14px 0; }
+  #ff-page .ff-marquee-row { gap: 30px; }
+  #ff-page .ff-marquee-item { font-size: 0.95rem; }
+
+  #ff-page .ff-statrow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 2rem; padding-top: 1.6rem; }
+  #ff-page .ff-stat-num { font-size: 1.4rem; }
+  #ff-page .ff-stat-lbl { font-size: 0.6rem; letter-spacing: 0.1em; line-height: 1.4; }
+  #ff-page .ff-phone-cluster::before { width: 300px; height: 300px; }
+
+  #ff-page .ff-acc-q { font-size: 1.02rem; padding: 17px 0; gap: 14px; }
+  #ff-page .ff-acc-a { padding: 0 0 20px 40px; }
+  #ff-page .ff-inside-cta { flex-direction: column; align-items: stretch; gap: 12px; }
+  #ff-page .ff-inside-cta .ff-btn { width: 100%; }
+  #ff-page .ff-inside-cta .ff-micro { text-align: center; }
+  #ff-page .ff-blob { width: 300px; height: 300px; }
+  #ff-page .ff-inside-visual .ff-phone { width: 220px; border-radius: 28px; }
+  #ff-page .ff-chip { font-size: 0.74rem; padding: 9px 14px; }
+  #ff-page .ff-chip-a { top: 8%; left: 0; }
+  #ff-page .ff-chip-b { bottom: 8%; right: 0; }
+
+  #ff-page .ff-strip-row figure { width: 200px; height: 270px; }
+
+  #ff-page .ff-arc { justify-content: flex-start; gap: 14px; padding-inline: 20px; }
+  #ff-page .ff-arc-out    { width: 150px; margin-top: 40px; }
+  #ff-page .ff-arc-mid    { width: 160px; margin-top: 18px; }
+  #ff-page .ff-arc-centre { width: 184px; }
+  #ff-page .ff-pills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  #ff-page .ff-pill { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 46px; padding: 9px 10px; font-size: 0.75rem; line-height: 1.25; border-radius: 14px; }
+
+  #ff-page .ff-centred { margin-bottom: 36px; }
+  #ff-page .ff-plan-body { padding: 24px 22px 26px; }
+  #ff-page .ff-plan-amt { font-size: 2.6rem; }
+  #ff-page .ff-trust { gap: 12px; flex-direction: column; align-items: flex-start; width: max-content; max-width: 100%; margin: 30px auto 0; }
+
+  #ff-page .ff-creds { grid-template-columns: minmax(0, 1fr); }
+  #ff-page .ff-cred { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  #ff-page .ff-founding-copy { padding: 34px 24px 38px; }
+  #ff-page .ff-founding-copy .ff-btn { width: 100%; }
+
+  #ff-page .ff-faq-q { font-size: 0.95rem; padding: 18px 2px; gap: 12px; }
+  #ff-page .ff-faq-a { padding: 0 14px 20px 46px; }
+  #ff-page .ff-faq-item.open .ff-faq-q { padding-inline: 14px; }
+  #ff-page .ff-faq-grid > div:first-child .ff-btn { width: 100%; }
+
+  #ff-page .ff-capture { padding: 64px 0; }
+  #ff-page .ff-card { padding: 24px 20px; min-height: 0; border-radius: var(--ff-r-md); }
+
+  #ff-page footer { padding: 56px 0 26px; }
+  #ff-page .ff-foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding-bottom: 36px; }
+  #ff-page .ff-foot-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+@media (max-width: 380px) {
+  #ff-page .ff-shell { padding-inline: 16px; }
+  #ff-page .ff-brand span { display: none; }
+  #ff-page .ff-nav .ff-btn { padding: 0.6rem 1rem; font-size: 0.68rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="ff-page">
+
+  <!-- ─── NAV ─────────────────────────────────────────────────── -->
+  <div class="ff-nav-wrap">
+    <nav class="ff-nav">
+      <a href="#top" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form</span></a>
+      <ul class="ff-nav-links">
+        <li><a href="#inside">What's Inside</a></li>
+        <li><a href="#app">The App</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#dallas">Meet Dallas</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#pricing" class="ff-btn ff-btn-solid ff-btn-sm">Join Now</a>
+    </nav>
+  </div>
+
+  <!-- ─── HERO ────────────────────────────────────────────────── -->
+  <header class="ff-hero" id="top">
+    <div class="ff-shell ff-hero-grid">
+      <div>
+        <div class="ff-proof">
+          <span class="ff-proof-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z"/></svg></span>
+          <span class="ff-proof-text">Written by an IFBB Pro</span>
+          <span class="ff-proof-rule"></span>
+          <span class="ff-proof-text" style="color:var(--ff-red)">St Pete Pro Champion</span>
+        </div>
+
+        <h1 class="ff-h1"><span class="thin">Train hard.</span><br>Finally <span class="red">look it.</span></h1>
+
+        <p class="ff-lead">You're putting the work in. Final Form is the app that makes sure it shows: training, nutrition and weekly check-ins in one place, written by IFBB Pro Dallas Botchway.</p>
+
+        <div class="ff-hero-btns">
+          <a href="#pricing" class="ff-btn ff-btn-solid">Join Now</a>
+          <a href="#inside" class="ff-btn ff-btn-line">See What's Inside &#8595;</a>
+        </div>
+        <p class="ff-micro">Cancel any time &middot; iOS and Android</p>
+      </div>
+
+      <div class="ff-hero-visual">
+        <div class="ff-hero-photo">
+          <img src="images/photos/hero-studio.webp" alt="Dallas Botchway on stage-ready form, studio shot on black">
+          <div class="ff-hero-badge"><b>IFBB Pro</b>Men's Physique</div>
+        </div>
+        <div class="ff-hero-phone ff-hero-phone-a ff-phone">
+          <img src="images/app/workout.webp" alt="A workout in the app, with every exercise, set and rep laid out">
+        </div>
+        <div class="ff-hero-phone ff-hero-phone-b ff-phone">
+          <img src="images/app/meals.webp" alt="Today's meal plan with calories and macros">
+        </div>
+      </div>
+    </div>
+
+    <div class="ff-marquee" aria-hidden="true">
+      <div class="ff-marquee-row" id="ffMarquee">
+        <span class="ff-marquee-item">Written by an <b>IFBB Pro</b></span>
+        <span class="ff-marquee-tri"></span>
+        <span class="ff-marquee-item"><b>Training</b> that progresses</span>
+        <span class="ff-marquee-tri"></span>
+        <span class="ff-marquee-item"><b>800+</b> recipes with macros</span>
+        <span class="ff-marquee-tri"></span>
+        <span class="ff-marquee-item">Check-ins <b>every week</b></span>
+        <span class="ff-marquee-tri"></span>
+        <span class="ff-marquee-item">Barcode scanner <b>built in</b></span>
+        <span class="ff-marquee-tri"></span>
+        <span class="ff-marquee-item">Cancel <b>any time</b></span>
+        <span class="ff-marquee-tri"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── WHAT IT IS ──────────────────────────────────────────── -->
+  <section class="ff-sec" style="padding-top:0">
+    <div class="ff-shell ff-about-grid">
+      <div class="ff-about-copy">
+        <span class="ff-label">What Final Form is</span>
+        <h2 class="ff-h2"><span class="thin">The effort's there.</span><br>Now get the result.</h2>
+        <div style="margin-top:1.6rem">
+          <p class="ff-lead">Most guys don't have an effort problem. They have a plan problem. Random sessions, guessed macros and nobody checking the numbers.</p>
+          <p class="ff-note">Final Form fixes that. Dallas writes the training, your nutrition sits in the same app you log it in, and your weekly check-in keeps the plan moving with you. No spreadsheets, no second tracking app, no starting again every Monday.</p>
+        </div>
+        <div class="ff-statrow">
+          <div><div class="ff-stat-num">14</div><div class="ff-stat-lbl">Features included</div></div>
+          <div><div class="ff-stat-num">800+</div><div class="ff-stat-lbl">Recipes with macros</div></div>
+          <div><div class="ff-stat-num">Weekly</div><div class="ff-stat-lbl">Check-ins</div></div>
+        </div>
+      </div>
+
+      <div class="ff-phone-cluster">
+        <div class="ff-phone ff-pc-1"><img src="images/app/log.webp" alt="Logging weight and reps for each set"></div>
+        <div class="ff-phone ff-pc-2"><img src="images/app/workout.webp" alt="The day's workout with every exercise listed"></div>
+        <div class="ff-phone ff-pc-3"><img src="images/app/meals.webp" alt="Today's meal plan with calories and macros"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHAT'S INSIDE ───────────────────────────────────────── -->
+  <section class="ff-sec ff-sec-alt" id="inside">
+    <div class="ff-shell ff-inside-grid">
+      <div>
+        <span class="ff-label">What's inside the membership</span>
+        <h2 class="ff-h2"><span class="thin">Everything.</span><br>One price.</h2>
+        <p class="ff-note ff-inside-sub">Six things you get from day one. Nothing held back for a higher tier, because there isn't one.</p>
+
+        <div class="ff-acc" id="ffInside">
+          <div class="ff-acc-item open">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7v10M17.5 7v10M3 9.5v5M21 9.5v5M6.5 12h11"/></svg></span>
+              <span class="t">Training that actually progresses</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Log every set, rep and weight as you go. Rest timers, exercise videos and progressive overload tracking are built in, so every session builds on the last instead of repeating it.</p></div>
+          </div>
+          <div class="ff-acc-item">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v7a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3V4M7 4v6M17 4c-1.5 1.8-2 3.6-2 5.5 0 1.6.7 2.5 2 2.5h1V4zM7 14v6M17 12v8"/></svg></span>
+              <span class="t">Nutrition without the guesswork</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Scan a barcode and log food in seconds. Your calorie and macro targets are set for you, with a full food database, meal plans and 800+ recipes behind them.</p></div>
+          </div>
+          <div class="ff-acc-item">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H8l-4 3z"/><path d="M9 10h6M9 13h3"/></svg></span>
+              <span class="t">Check-ins that change the plan</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Submit your weight, photos and notes every week in the app. When progress stalls, the plan changes, based on your real numbers rather than a hunch.</p></div>
+          </div>
+          <div class="ff-acc-item">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5 11 13.5l4.5-4.5"/><circle cx="12" cy="12" r="9"/></svg></span>
+              <span class="t">Habits, tasks and goals</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Track water, steps, sleep and habits of your own, with streaks and reminders. Daily and weekly tasks keep the small stuff, the stuff that adds up, in check.</p></div>
+          </div>
+          <div class="ff-acc-item">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 3 10 2.5-7 1.5 2h5"/></svg></span>
+              <span class="t">Your health data in one place</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Syncs with Apple Health and Google Fit for steps, heart rate, HRV and sleep. Home screen widgets keep your key numbers one glance away.</p></div>
+          </div>
+          <div class="ff-acc-item">
+            <button class="ff-acc-q" type="button">
+              <span class="ff-acc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.9 9l5.6.2-4.4 3.4 1.6 5.4L12 14.8 7.3 18l1.6-5.4L4.5 9.2 10.1 9z"/></svg></span>
+              <span class="t">Everything, for one price</span>
+              <span class="ff-acc-tog" aria-hidden="true">+</span>
+            </button>
+            <div class="ff-acc-a"><p>Every feature from the day you join, including progress photos, PRs and history, the recipe library, goal tracking and the injury system.</p></div>
+          </div>
+        </div>
+
+        <div class="ff-inside-cta">
+          <a href="#pricing" class="ff-btn ff-btn-solid">Join Now</a>
+          <span class="ff-micro">Cancel any time &middot; iOS and Android</span>
+        </div>
+      </div>
+
+      <div class="ff-inside-visual">
+        <span class="ff-blob" aria-hidden="true"></span>
+        <div class="ff-phone"><img src="images/app/log.webp" alt="Logging an exercise set by set, with your best lifts alongside"></div>
+        <span class="ff-chip ff-chip-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Every set tracked</span>
+        <span class="ff-chip ff-chip-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>800+ recipes with macros</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHOTO STRIP ─────────────────────────────────────────── -->
+  <section class="ff-sec" style="padding-bottom:40px">
+    <div class="ff-shell">
+      <div class="ff-head-split">
+        <div>
+          <span class="ff-label">Train the way Dallas trains</span>
+          <h2 class="ff-h2"><span class="thin">Built in the gym,</span><br>not on a whiteboard.</h2>
+        </div>
+        <p class="ff-note">Every programme in the app comes from the same place Dallas's physique did: years of hard sessions, honest tracking and doing the basics better than everyone else.</p>
+      </div>
+    </div>
+    <div class="ff-strip">
+      <div class="ff-strip-row" id="ffStrip">
+        <figure><img src="images/photos/back-pose.webp" alt="Dallas hitting a back double biceps" loading="lazy"></figure>
+        <figure><img src="images/photos/tbar-row.webp" alt="Dallas on a T-bar row" loading="lazy"></figure>
+        <figure><img src="images/photos/kb-portrait.webp" alt="Dallas kneeling with a kettlebell" loading="lazy"></figure>
+        <figure><img src="images/photos/pushdown.webp" alt="Dallas doing a cable pushdown" loading="lazy"></figure>
+        <figure><img src="images/photos/pec-fly.webp" alt="Dallas on the pec fly" loading="lazy"></figure>
+        <figure><img src="images/photos/dumbbells.webp" alt="Dallas with a pair of dumbbells" loading="lazy"></figure>
+        <figure><img src="images/photos/preacher.webp" alt="Dallas on a machine curl" loading="lazy"></figure>
+        <figure><img src="images/photos/kb-overhead.webp" alt="Dallas pressing a kettlebell overhead from a half kneel" loading="lazy"></figure>
+        <figure><img src="images/photos/row.webp" alt="Dallas on a chest-supported row" loading="lazy"></figure>
+        <figure><img src="images/photos/seated.webp" alt="Dallas resting between sets" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── INSIDE THE APP ──────────────────────────────────────── -->
+  <section class="ff-sec" id="app" style="padding-top:60px">
+    <div class="ff-shell">
+      <div class="ff-head-split">
+        <div>
+          <span class="ff-label">Inside the app</span>
+          <h2 class="ff-h2"><span class="thin">Everything you need,</span><br>right in your pocket.</h2>
+        </div>
+        <p class="ff-note">From today's session to your macros, the barcode scanner and your weekly check-in, it's one app rather than five.</p>
+      </div>
+    </div>
+
+    <div class="ff-screens">
+      <div class="ff-arc">
+        <figure class="ff-phone ff-arc-out"><img src="images/app/foodlog.webp" alt="The day's food log split by meal" loading="lazy"></figure>
+        <figure class="ff-phone ff-arc-mid"><img src="images/app/addfood.webp" alt="Adding food by search, barcode scan, favourites or recipes" loading="lazy"></figure>
+        <figure class="ff-phone ff-arc-centre"><img src="images/app/workout.webp" alt="The day's workout" loading="lazy"></figure>
+        <figure class="ff-phone ff-arc-mid"><img src="images/app/log.webp" alt="Logging sets, reps and weight" loading="lazy"></figure>
+        <figure class="ff-phone ff-arc-out"><img src="images/app/habits.webp" alt="Choosing a new habit to track" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="ff-shell">
+      <div class="ff-pills">
+        <span class="ff-pill ff-pill-on">Workout Logger</span>
+        <span class="ff-pill">Meal Plan System</span>
+        <span class="ff-pill ff-pill-on">Food Logger &amp; Scanner</span>
+        <span class="ff-pill">Apple &amp; Google Health</span>
+        <span class="ff-pill ff-pill-on">Goal Setting</span>
+        <span class="ff-pill">Workout PRs &amp; History</span>
+        <span class="ff-pill ff-pill-on">Progress Photos</span>
+        <span class="ff-pill">Habit Tracking</span>
+        <span class="ff-pill ff-pill-on">Task System</span>
+        <span class="ff-pill">Check-In System</span>
+        <span class="ff-pill ff-pill-on">Recipes &amp; Favourites</span>
+        <span class="ff-pill">Injury System</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRICING ─────────────────────────────────────────────── -->
+  <!-- PLACEHOLDER PRICES: swap in Dallas's real prices, and set the
+       checkout links in FF_CHECKOUT in the script at the bottom. -->
+  <section class="ff-sec ff-sec-alt" id="pricing">
+    <div class="ff-shell">
+      <div class="ff-centred">
+        <span class="ff-label">Membership</span>
+        <h2 class="ff-h2"><span class="thin">Stop guessing.</span><br>Start your final form.</h2>
+        <p class="ff-note">The same everything on every plan. The longer you commit, the less you pay.</p>
+      </div>
+
+      <div class="ff-plans">
+        <article class="ff-plan">
+          <div class="ff-plan-body">
+            <div class="ff-plan-tag">Monthly</div>
+            <div class="ff-plan-price"><span class="ff-plan-amt">$19.99</span><span class="ff-plan-per">per month, rolling</span></div>
+            <span class="ff-plan-day">66&cent; a day</span>
+            <a href="#quiz" class="ff-btn ff-btn-line" data-plan="monthly">Join Monthly</a>
+            <p class="ff-plan-note">Every feature, from day one. The most flexible way to start.</p>
+          </div>
+        </article>
+
+        <article class="ff-plan ff-plan-pop">
+          <span class="ff-popular">Most Popular</span>
+          <div class="ff-plan-body">
+            <div class="ff-plan-tag">3 Months</div>
+            <div class="ff-plan-price"><span class="ff-plan-amt">$49.99</span><span class="ff-plan-per">$16.66 a month</span></div>
+            <span class="ff-plan-day">55&cent; a day</span>
+            <a href="#quiz" class="ff-btn ff-btn-solid" data-plan="quarterly">Join 3 Months</a>
+            <p class="ff-plan-note">A proper block of time to build the habits and see the change.</p>
+          </div>
+        </article>
+
+        <article class="ff-plan">
+          <div class="ff-plan-body">
+            <div class="ff-plan-tag">Annual</div>
+            <div class="ff-plan-price"><span class="ff-plan-amt">$149.99</span><span class="ff-plan-per">$12.50 a month</span></div>
+            <span class="ff-plan-day">41&cent; a day &middot; Best value</span>
+            <a href="#quiz" class="ff-btn ff-btn-line" data-plan="annual">Join Annual</a>
+            <p class="ff-plan-note">Commit to the full year and save the most.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="ff-trust">
+        <span><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span> Every feature on every plan</span>
+        <span><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span> Cancel any time</span>
+        <span><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span> iOS and Android</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MEET DALLAS ─────────────────────────────────────────── -->
+  <section class="ff-sec" id="dallas">
+    <div class="ff-shell ff-coach">
+      <div class="ff-coach-photos">
+        <div class="ff-coach-photo"><img src="images/photos/trophy.webp" alt="Dallas Botchway holding the St Pete Pro champion's trophy on stage" loading="lazy"></div>
+        <div class="ff-coach-inset"><img src="images/photos/trophy-shield.webp" alt="Dallas with the St Pete Pro shield and champion's ring" loading="lazy"></div>
+      </div>
+      <div class="ff-coach-copy">
+        <span class="ff-label">Meet Dallas</span>
+        <h2 class="ff-h2"><span class="thin">I was the guy</span><br>training without results.</h2>
+        <div style="margin-top:1.6rem">
+          <p class="ff-lead">Before the pro card, I was a regular gym-goer putting in the hours and wondering why the mirror wasn't keeping up.</p>
+          <p class="ff-note">What changed wasn't how hard I trained. It was having a plan, tracking it properly and adjusting when things stalled. That's exactly what I've put into Final Form: the training, the nutrition and the check-ins that took me from frustrated to an IFBB Pro stage, built for guys who already have the work ethic.</p>
+        </div>
+        <div class="ff-creds">
+          <div class="ff-cred"><div class="ff-stat-num red">IFBB Pro</div><div class="ff-stat-lbl">Men's Physique</div></div>
+          <div class="ff-cred"><div class="ff-stat-num">1st Place</div><div class="ff-stat-lbl">St Pete Pro</div></div>
+          <div class="ff-cred"><div class="ff-stat-num">Coach</div><div class="ff-stat-lbl">90-day transformations</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOUNDING MEMBERS ────────────────────────────────────── -->
+  <section class="ff-sec" style="padding-top:0" id="results">
+    <div class="ff-shell">
+      <div class="ff-founding">
+        <div class="ff-founding-copy">
+          <span class="ff-label">Founding members</span>
+          <h2 class="ff-h2"><span class="thin">Be one of the</span><br>first results.</h2>
+          <p class="ff-note">Final Form is launching now. The first members in get the full app from day one, and their transformations are the ones that end up on this page.</p>
+          <ul class="ff-founding-list">
+            <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span>Start with the first wave of Final Form members</li>
+            <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span>Every feature from day one, nothing held back</li>
+            <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span>Weekly check-ins that keep the plan moving with you</li>
+          </ul>
+          <a href="#pricing" class="ff-btn ff-btn-solid">Claim Your Spot</a>
+        </div>
+        <div class="ff-founding-photo"><img src="images/photos/cable.webp" alt="Dallas mid-set on a cable row" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─────────────────────────────────────────────────── -->
+  <section class="ff-sec ff-sec-alt" id="faq">
+    <div class="ff-shell ff-faq-grid">
+      <div>
+        <span class="ff-label">FAQ</span>
+        <h2 class="ff-h2"><span class="thin">Everything</span><br>you'd ask</h2>
+        <p class="ff-note" style="margin-top:1.2rem">Still not sure? Take the quick quiz below and it'll point you at the right place to start.</p>
+        <div style="margin-top:1.8rem">
+          <a href="#pricing" class="ff-btn ff-btn-solid">Join Now</a>
+          <p class="ff-micro" style="margin-top:0.9rem">Cancel any time &middot; iOS and Android</p>
+        </div>
+      </div>
+
+      <div class="ff-faq-list" id="ffFaq">
+        <div class="ff-faq-item open">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">01</span><span class="t">What do I actually get?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>Everything, from the day you join. Training plans with video demos, meal plans and macro targets, the barcode scanner and food logger, habit tracking, progress photos, PRs and history, the recipe library, weekly check-ins and the injury system. There's no higher tier to upgrade to.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">02</span><span class="t">I already train hard. Why aren't I seeing results?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>Usually it's not effort. It's no clear progression, nutrition that doesn't match the goal, and nothing checking whether it's working. Final Form puts all three in one place so the work you're already doing finally shows.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">03</span><span class="t">Which plan should I pick?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>Every plan has the same everything in it, so it comes down to how long you want to commit. Monthly is the most flexible. Three months gives you a proper block to see the change, and annual is the best value. Take the quiz if you want a steer.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">04</span><span class="t">Can I cancel whenever I want?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>Yes. The monthly plan is rolling and you can cancel any time. The 3 month and annual plans run for the term you choose.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">05</span><span class="t">Do I need a full gym?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>The programmes are built for the gym, and you tell the app which equipment you have so the sessions fit it. Smart swaps cover anything your gym doesn't have.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">06</span><span class="t">Do I still need a separate food tracking app?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>No. The barcode scanner, food database, your own recipes and your macro targets all live in Final Form, right next to your training.</p></div>
+        </div>
+        <div class="ff-faq-item">
+          <button class="ff-faq-q" type="button"><span class="ff-faq-n">07</span><span class="t">What if I pick up an injury?</span><span class="ff-faq-ico">+</span></button>
+          <div class="ff-faq-a"><p>Flag it in the injury system and the plan works around it. Substitutions mean you never have to train through pain or lose your progress while it settles.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── QUIZ + LEAD FORM ────────────────────────────────────── -->
+  <section class="ff-capture" id="quiz">
+    <div class="ff-shell ff-capture-grid">
+      <div class="ff-capture-copy">
+        <span class="ff-label">Not sure where to start?</span>
+        <h2 class="ff-h2"><span class="thin">Answer three</span><br>quick questions</h2>
+        <p>Tell us what you're training for and how your week looks, and we'll point you at the right place to start. Leave your details at the end and Dallas's team will be in touch.</p>
+      </div>
+
+      <div class="ff-card" id="ffQuiz">
+        <div class="ff-quiz-dots" aria-hidden="true">
+          <span class="ff-quiz-dot on"></span><span class="ff-quiz-dot"></span><span class="ff-quiz-dot"></span><span class="ff-quiz-dot"></span>
+        </div>
+
+        <div class="ff-quiz-step active" data-step="1">
+          <p class="ff-quiz-q">What are you training for?</p>
+          <div class="ff-quiz-opts">
+            <button type="button" class="ff-quiz-opt" data-value="build muscle">Build muscle</button>
+            <button type="button" class="ff-quiz-opt" data-value="lose fat">Lose fat</button>
+            <button type="button" class="ff-quiz-opt" data-value="get lean and defined">Get lean and defined</button>
+            <button type="button" class="ff-quiz-opt" data-value="get stage ready">Get stage ready</button>
+          </div>
+        </div>
+
+        <div class="ff-quiz-step" data-step="2">
+          <p class="ff-quiz-q">How many days a week can you train?</p>
+          <div class="ff-quiz-opts">
+            <button type="button" class="ff-quiz-opt" data-value="3 days">3 days</button>
+            <button type="button" class="ff-quiz-opt" data-value="4 days">4 days</button>
+            <button type="button" class="ff-quiz-opt" data-value="5 or more days">5 or more days</button>
+          </div>
+          <button type="button" class="ff-quiz-back">&#8592; Back</button>
+        </div>
+
+        <div class="ff-quiz-step" data-step="3">
+          <p class="ff-quiz-q">How long have you been training?</p>
+          <div class="ff-quiz-opts">
+            <button type="button" class="ff-quiz-opt" data-value="under a year">Under a year</button>
+            <button type="button" class="ff-quiz-opt" data-value="1 to 3 years">1 to 3 years</button>
+            <button type="button" class="ff-quiz-opt" data-value="3 years or more">3 years or more</button>
+          </div>
+          <button type="button" class="ff-quiz-back">&#8592; Back</button>
+        </div>
+
+        <div class="ff-quiz-step" data-step="4">
+          <p class="ff-quiz-q">Where shall we send it?</p>
+          <p class="ff-quiz-sub" id="ffRecap"></p>
+          <form id="ffForm" novalidate>
+            <div class="ff-field"><label for="ffName">Your name</label><input id="ffName" name="name" type="text" placeholder="Jordan Smith" autocomplete="name" required></div>
+            <div class="ff-field"><label for="ffEmail">Email</label><input id="ffEmail" name="email" type="email" placeholder="you@email.com" autocomplete="email" required></div>
+            <div class="ff-field"><label for="ffPhone">Phone</label><input id="ffPhone" name="phone" type="tel" placeholder="(555) 123 4567" autocomplete="tel" required></div>
+            <div class="ff-field"><label for="ffInsta">Instagram <span class="ff-opt">optional</span></label><input id="ffInsta" name="instagram" type="text" placeholder="@yourhandle" autocomplete="off"></div>
+            <input type="text" name="_gotcha" id="ffGotcha" class="ff-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" class="ff-btn ff-btn-solid ff-go">See my recommendation</button>
+            <p class="ff-small" id="ffMsg">No spam, ever.</p>
+          </form>
+          <button type="button" class="ff-quiz-back">&#8592; Back</button>
+        </div>
+
+        <div class="ff-quiz-step ff-result" data-step="result">
+          <span class="ff-badge"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg>Your recommendation</span>
+          <p class="ff-summary" id="ffSummary"></p>
+          <h3 class="ff-h3">The Final Form membership</h3>
+          <p class="ff-why">Training written around your days, nutrition in the same place you log it, and a weekly check-in that moves the plan with you.</p>
+          <div class="ff-qprice"><span class="ff-qamt">$19.99</span><span class="ff-qper">a month, rolling</span></div>
+          <a class="ff-btn ff-btn-solid" href="#pricing" id="ffResultJoin">See the plans</a>
+          <a class="ff-btn ff-wa" id="ffWhatsApp" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Message Dallas on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="ff-shell">
+      <div class="ff-foot-grid">
+        <div class="ff-foot-brand">
+          <a href="#top" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form Physique</span></a>
+          <p>Transforming your physique to its final form. Training, nutrition and check-ins in one app, from IFBB Pro Dallas Botchway.</p>
+        </div>
+        <div class="ff-foot-col">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#inside">What's inside</a></li>
+            <li><a href="#app">Inside the app</a></li>
+          </ul>
+        </div>
+        <div class="ff-foot-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#dallas">Meet Dallas</a></li>
+            <li><a href="#quiz">Take the quiz</a></li>
+          </ul>
+        </div>
+        <div class="ff-foot-col">
+          <h4>Help &amp; Social</h4>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#" id="ffInstagram" target="_blank" rel="noopener">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ff-wordmark">Final Form</div>
+
+      <div class="ff-foot-bottom">
+        <span>&copy; <span id="ffYear">2026</span> Final Form Physique. All rights reserved.</span>
+        <span>Built for the ones who put the work in.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ==================================================================
+     SETTINGS: everything you'd want to change lives here.
+     ================================================================== */
+
+  /* Checkout links for each plan. Left empty, the plan buttons scroll
+     down to the quiz instead of going to a checkout. */
+  var FF_CHECKOUT = {
+    monthly:   "",
+    quarterly: "",
+    annual:    ""
+  };
+
+  /* The REPS dashboard form endpoint. Leads land under the client whose
+     slug matches FF_CLIENT. Left empty, the quiz still runs but saves
+     nothing. */
+  var FF_LEADS_ENDPOINT = "https://dashboard.jolly-heart-2b8d.workers.dev/api/forms";
+  var FF_CLIENT = "finalform";
+
+  /* Dallas's WhatsApp number, international format, digits only (a US
+     number (555) 123 4567 becomes 15551234567). Left empty, the
+     WhatsApp button is hidden. */
+  var FF_WHATSAPP = "";
+
+  /* Dallas's Instagram profile URL. Left empty, the footer link is hidden. */
+  var FF_INSTAGRAM = "";
+
+  /* ================================================================== */
+
+  var page = document.getElementById('ff-page');
+  if (!page) return;
+
+  document.getElementById('ffYear').textContent = new Date().getFullYear();
+
+  var ig = document.getElementById('ffInstagram');
+  if (ig) { if (FF_INSTAGRAM) ig.href = FF_INSTAGRAM; else ig.parentElement.remove(); }
+
+  /* Plan buttons: go to checkout when a link is set */
+  page.querySelectorAll('[data-plan]').forEach(function (a) {
+    var url = FF_CHECKOUT[a.getAttribute('data-plan')];
+    if (url) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+  });
+  if (FF_CHECKOUT.monthly) {
+    var rj = document.getElementById('ffResultJoin');
+    rj.href = FF_CHECKOUT.monthly; rj.target = '_blank'; rj.rel = 'noopener'; rj.textContent = 'Join Now';
+  }
+
+  /* Accordions */
+  function accordion(container, qSel, itemSel) {
+    if (!container) return;
+    container.addEventListener('click', function (e) {
+      var btn = e.target.closest(qSel);
+      if (!btn) return;
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('open');
+      container.querySelectorAll(itemSel).forEach(function (i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  }
+  accordion(document.getElementById('ffInside'), '.ff-acc-q', '.ff-acc-item');
+  accordion(document.getElementById('ffFaq'), '.ff-faq-q', '.ff-faq-item');
+
+  /* Loops: duplicate the rows so the scroll has no gap */
+  ['ffMarquee', 'ffStrip'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = el.innerHTML + el.innerHTML;
+  });
+
+  /* Quiz */
+  var quiz = document.getElementById('ffQuiz');
+  var form = document.getElementById('ffForm');
+  var steps = Array.prototype.slice.call(quiz.querySelectorAll('.ff-quiz-step'));
+  var dots = Array.prototype.slice.call(quiz.querySelectorAll('.ff-quiz-dot'));
+  var answers = {};
+  var QUESTIONS = { 1: 'Training for', 2: 'Days a week', 3: 'Training for how long' };
+
+  function val(id) { var el = document.getElementById(id); return (el && el.value ? el.value : '').trim(); }
+  function goodEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function digits(v) { return v.replace(/[^0-9]/g, ''); }
+  function sentence() {
+    var p = [];
+    if (answers[1]) p.push('Training to ' + answers[1]);
+    if (answers[2]) p.push(answers[2] + ' a week');
+    if (answers[3]) p.push('training ' + answers[3]);
+    return p.join(', ') + '.';
+  }
+  function show(key) {
+    steps.forEach(function (s) { s.classList.toggle('active', s.getAttribute('data-step') === String(key)); });
+    quiz.classList.toggle('done', key === 'result');
+    var n = parseInt(key, 10);
+    dots.forEach(function (d, i) { d.classList.toggle('on', !isNaN(n) && i < n); });
+    if (key === 4) document.getElementById('ffRecap').textContent = sentence();
+  }
+
+  quiz.addEventListener('click', function (e) {
+    var opt = e.target.closest('.ff-quiz-opt');
+    if (opt) {
+      var step = opt.closest('.ff-quiz-step');
+      var num = parseInt(step.getAttribute('data-step'), 10);
+      step.querySelectorAll('.ff-quiz-opt').forEach(function (o) { o.classList.remove('on'); });
+      opt.classList.add('on');
+      answers[num] = opt.getAttribute('data-value');
+      show(num + 1);
+      return;
+    }
+    var back = e.target.closest('.ff-quiz-back');
+    if (back) show(Math.max(1, parseInt(back.closest('.ff-quiz-step').getAttribute('data-step'), 10) - 1));
+  });
+
+  var wa = document.getElementById('ffWhatsApp');
+  function finish(name) {
+    document.getElementById('ffSummary').textContent = sentence();
+    if (FF_WHATSAPP) {
+      var first = name.split(/\s+/)[0];
+      var note = 'Hi Dallas, I just did the quiz on your website' + (first ? ', my name is ' + first : '') + '. ' + sentence() + ' Is the app right for me?';
+      wa.href = 'https://wa.me/' + digits(FF_WHATSAPP) + '?text=' + encodeURIComponent(note);
+    } else if (wa) {
+      wa.remove();
+    }
+    show('result');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (val('ffGotcha')) { finish(''); return; }
+
+    var name = val('ffName'), email = val('ffEmail'), phone = val('ffPhone'), insta = val('ffInsta');
+    var msg = document.getElementById('ffMsg');
+    var btn = form.querySelector('button[type="submit"]');
+
+    document.getElementById('ffName').classList.toggle('ff-bad', !name);
+    document.getElementById('ffEmail').classList.toggle('ff-bad', !goodEmail(email));
+    document.getElementById('ffPhone').classList.toggle('ff-bad', digits(phone).length < 7);
+
+    var problem = !name ? 'Please enter your name.'
+      : !goodEmail(email) ? 'Please enter a valid email address.'
+      : digits(phone).length < 7 ? 'Please enter a phone number we can reach you on.' : '';
+    if (problem) { msg.textContent = problem; return; }
+
+    msg.textContent = 'No spam, ever.';
+    btn.textContent = 'Sending...'; btn.disabled = true;
+
+    var payloadAnswers = {};
+    Object.keys(QUESTIONS).forEach(function (k) { if (answers[k]) payloadAnswers[QUESTIONS[k]] = answers[k]; });
+    if (insta) payloadAnswers.Instagram = insta;
+
+    if (!FF_LEADS_ENDPOINT) { finish(name); return; }
+
+    fetch(FF_LEADS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client: FF_CLIENT,
+        name: name,
+        email: email.toLowerCase(),
+        phone: phone,
+        source: 'quiz',
+        form: 'Homepage quiz',
+        page: window.location.pathname || '/',
+        answers: payloadAnswers
+      })
+    }).catch(function (err) {
+      console.error('Final Form: the enquiry did not reach the dashboard', err);
+    }).then(function () { finish(name); });
+  });
+
+  show(1);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/**
+ * Cloudflare Workers settings for the Final Form Physique site.
+ * Static files only: no Worker script and nothing to build.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "finalform",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
