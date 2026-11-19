@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Your Call | Final Form Physique</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/config.js"></script>
+</head>
+<body>
+<div id="ff-page">
+
+  <div class="ff-nav-wrap">
+    <nav class="ff-nav">
+      <a href="index.html" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form</span></a>
+      <a href="#book" class="ff-btn ff-btn-solid ff-btn-sm">Book Your Call</a>
+    </nav>
+  </div>
+
+  <header class="ff-hero" id="book">
+    <div class="ff-shell ff-book-grid" style="padding-bottom:90px">
+      <div class="ff-book-copy">
+        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for your answers.</p>
+        <h1 class="ff-h1"><span class="thin">Good news.</span><br>We can <span class="red">help.</span></h1>
+        <p class="ff-lead">Based on your answers, you're a great fit for one-to-one coaching with Dallas. Book your call now to talk through your goal and how we'd get you there.</p>
+        <ul class="ff-list">
+          <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span><span><b>Where you're at now.</b> Your training, your nutrition and what's been holding you back.</span></li>
+          <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span><span><b>Where you want to be.</b> Your goal for the next 12 weeks and beyond.</span></li>
+          <li><span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span><span><b>How we'd get you there.</b> What coaching with Dallas would look like for you.</span></li>
+        </ul>
+        <div class="ff-mini-coach">
+          <img src="images/photos/kb-portrait.webp" alt="Dallas Botchway">
+          <div><b>Dallas Botchway</b><span>IFBB Pro &middot; St Pete Pro Champion</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="ff-cal" id="ffCal"></div>
+        <div class="ff-cal-empty" id="ffCalEmpty" hidden>
+          <div>
+            <h2 class="ff-h3">Booking opens shortly</h2>
+            <p>The calendar isn't live yet. Your details are with Dallas's team and we'll be in touch on the number you gave us to arrange your call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <footer>
+    <div class="ff-shell">
+      <div class="ff-foot-top">
+        <div>
+          <a href="index.html" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form Physique</span></a>
+          <p>Transforming your physique to its final form. One-to-one coaching with IFBB Pro Dallas Botchway.</p>
+        </div>
+      </div>
+      <div class="ff-wordmark">Final Form</div>
+      <div class="ff-foot-bottom">
+        <span>&copy; <span class="ff-year">2026</span> Final Form Physique. All rights reserved.</span>
+        <span>Built for the ones who put the work in.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var CFG = window.FF_CONFIG || {};
+  document.querySelectorAll('.ff-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  var lead = {};
+  try { lead = JSON.parse(sessionStorage.getItem('ff_lead') || '{}') || {}; } catch (err) {}
+  var name = (new URLSearchParams(window.location.search).get('name') || (lead.name || '').split(/\s+/)[0] || '')
+    .replace(/[^\p{L}' -]/gu, '').trim().slice(0, 40);
+
+  if (name) document.getElementById('ffHello').textContent = 'Thanks, ' + name + '.';
+
+  var calBox = document.getElementById('ffCal');
+  if (!CFG.calendly) {
+    calBox.remove();
+    document.getElementById('ffCalEmpty').hidden = false;
+    return;
+  }
+
+  /* Embed Calendly, pre-filled with the name and email from the quiz. */
+  var url = CFG.calendly + (CFG.calendly.indexOf('?') > -1 ? '&' : '?') +
+    'hide_gdpr_banner=1&primary_color=bd3c2c' +
+    (lead.name ? '&name=' + encodeURIComponent(lead.name) : '') +
+    (lead.email ? '&email=' + encodeURIComponent(lead.email) : '');
+  var widget = document.createElement('div');
+  widget.className = 'calendly-inline-widget';
+  widget.setAttribute('data-url', url);
+  calBox.appendChild(widget);
+  var s = document.createElement('script');
+  s.src = 'https://assets.calendly.com/assets/external/widget.js';
+  s.async = true;
+  document.body.appendChild(s);
+
+  /* Once they've booked, send them to the confirmation page. */
+  window.addEventListener('message', function (e) {
+    if (e.origin.indexOf('calendly.com') === -1) return;
+    if (e.data && e.data.event === 'calendly.event_scheduled') {
+      window.location.href = 'call-booked.html' + (name ? '?name=' + encodeURIComponent(name) : '');
+    }
+  });
+})();
+</script>
+</body>
+</html>

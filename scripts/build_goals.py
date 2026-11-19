@@ -1,13 +1,12 @@
-"""Builds the three goal pages (the thank-you pages people land on after the quiz).
+"""Builds the three one-off program pages. The quiz sends people here when
+their budget is under $100, to the page for the goal they picked.
+Checkout links, prices and WhatsApp live in js/config.js.
 
 Edit the copy in GOALS below, then run from the repo root:
     python3 scripts/build_goals.py
 """
 import html, json, os
 
-# Same on all three pages. Left empty, that button is hidden.
-BOOKING = ""   # e.g. a Calendly link for a call with the team
-WHATSAPP = ""  # digits only with country code, e.g. 15551234567
 
 GOALS = {
   "fat-loss": {
@@ -17,12 +16,12 @@ GOALS = {
     "photo_pos": "50% 30%",
     "lead": "Built to strip body fat while holding on to the muscle you've worked for, so the effort you're putting in finally shows.",
     "includes": [
-      ("Custom training plan", "Written to keep your muscle while you lean out, around your schedule and your gym."),
-      ("Custom nutrition and macros", "A deficit you can actually live with. No starving, no cutting out everything you enjoy."),
-      ("Weekly check-ins with Dallas", "Your weight, photos and feedback reviewed every week, so nothing drifts."),
+      ("12 weeks of training", "Written by Dallas to keep your muscle while you lean out, session by session."),
+      ("Nutrition and macro targets", "A deficit you can actually live with. No starving, no cutting out everything you enjoy."),
       ("Steps and cardio set for you", "Exactly how much to do and when, so you're not guessing on the treadmill."),
-      ("Adjustments when progress stalls", "Plateaus get handled the same week, based on your real numbers."),
-      ("Direct access to Dallas", "Questions answered by the person writing your plan."),
+      ("Exercise demos", "See how every movement should be done, so every rep counts."),
+      ("Progression built in", "Each block builds on the last, so the fat keeps coming off."),
+      ("Yours to keep", "Pay once, no subscription. Run it at your own pace."),
     ],
     "phases": [
       ("Weeks 1 to 4", "Set the foundation", "Nutrition dialled in, training baseline set and the daily habits that make fat loss stick."),
@@ -37,12 +36,12 @@ GOALS = {
     "photo_pos": "50% 25%",
     "lead": "Built to add real size, with training that progresses every week and food that fuels the growth instead of just adding fat.",
     "includes": [
-      ("Custom hypertrophy training", "Programmed around your body, your weak points and the equipment you have."),
-      ("Nutrition built for growth", "A surplus that adds muscle, not just weight, with macros set for you."),
-      ("Weekly check-ins with Dallas", "Your lifts, weight and photos reviewed every week and the plan moved forward."),
-      ("Progressive overload, tracked", "Every session builds on the last, so you're always heading somewhere."),
+      ("12 weeks of hypertrophy training", "Written by Dallas to add real size, session by session."),
+      ("Nutrition built for growth", "A surplus that adds muscle, not just weight, with macro targets to hit."),
+      ("Progressive overload built in", "Every session builds on the last, so you're always heading somewhere."),
+      ("Exercise demos", "See how every movement should be done, so every rep counts."),
       ("Weak-point focus", "Lagging body parts brought up, so the whole physique grows in proportion."),
-      ("Direct access to Dallas", "Questions answered by the person writing your plan."),
+      ("Yours to keep", "Pay once, no subscription. Run it at your own pace."),
     ],
     "phases": [
       ("Weeks 1 to 4", "Build the base", "Technique tightened, baseline lifts set and eating to grow without overdoing it."),
@@ -55,14 +54,14 @@ GOALS = {
     "photo": "hero-studio.webp",
     "photo_alt": "Dallas Botchway, studio shot on black",
     "photo_pos": "50% 15%",
-    "lead": "Built around the look the division rewards: wide shoulders, a tight waist and conditioning that holds up. Coached by a pro who's won on that stage.",
+    "lead": "Built around the look the division rewards: wide shoulders, a tight waist and conditioning that holds up. Written by a pro who's won on that stage.",
     "includes": [
-      ("Physique-focused training", "Shoulders, lats and the V-taper prioritised, without neglecting the rest."),
+      ("12 weeks of physique training", "Shoulders, lats and the V-taper prioritised, written by an IFBB Pro."),
       ("Nutrition for lean mass", "Macros set to build the right muscle while keeping you sharp and conditioned."),
-      ("Weekly check-ins with photo review", "Dallas looks at your physique every week the way a judge would."),
-      ("Weak-point programming", "Whatever's holding your look back gets brought up first."),
-      ("Stage guidance if you're competing", "Want to step on stage? You're learning from someone who's won there."),
-      ("Direct access to Dallas", "Questions answered by an IFBB Pro, not a support inbox."),
+      ("Weak-point programming", "The areas that hold most physiques back get brought up first."),
+      ("Exercise demos", "See how every movement should be done, so every rep counts."),
+      ("Conditioning built in", "Cardio and steps that sharpen you up without eating into your gains."),
+      ("Yours to keep", "Pay once, no subscription. Run it at your own pace."),
     ],
     "phases": [
       ("Weeks 1 to 4", "Assess and build", "Your weak points identified, your baseline set and your nutrition dialled in."),
@@ -100,6 +99,7 @@ def page(slug, g):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
+<script src="js/config.js"></script>
 </head>
 <body>
 <!-- Generated by scripts/build_goals.py. Edit the copy there, not here. -->
@@ -108,19 +108,19 @@ def page(slug, g):
   <div class="ff-nav-wrap">
     <nav class="ff-nav">
       <a href="index.html" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form</span></a>
-      <a href="#next" class="ff-btn ff-btn-solid ff-btn-sm">Next Step</a>
+      <a href="#next" class="ff-btn ff-btn-solid ff-btn-sm">Get The Program</a>
     </nav>
   </div>
 
   <header class="ff-hero ff-ty-hero">
     <div class="ff-shell ff-hero-grid">
       <div>
-        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">You're in. Your details are with Dallas's team.</p>
+        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for your answers. Here's your match.</p>
         <h1 class="ff-h1"><span class="thin">This is</span><br><span class="red">for you.</span></h1>
         <p class="ff-h3" style="margin:1.4rem 0 1rem">{e(title.replace("Your ", "The "))}</p>
         <p class="ff-lead" style="margin-bottom:2.2rem">{e(g["lead"])}</p>
         <div class="ff-hero-btns">
-          <a href="#next" class="ff-btn ff-btn-solid">See What Happens Next</a>
+          <a href="#next" class="ff-btn ff-btn-solid">Get The Program</a>
           <a href="#included" class="ff-btn ff-btn-line">What's Included &#8595;</a>
         </div>
       </div>
@@ -135,7 +135,7 @@ def page(slug, g):
     <div class="ff-shell">
       <div class="ff-head-split">
         <h2 class="ff-h2"><span class="thin">What's in your</span><br>12 weeks</h2>
-        <p class="ff-note">Everything is built for you from scratch and run one to one by Dallas.</p>
+        <p class="ff-note">Everything you need to run the full 12 weeks, written by Dallas.</p>
       </div>
       <ul class="ff-includes">
 {inc}
@@ -147,7 +147,7 @@ def page(slug, g):
     <div class="ff-shell">
       <div class="ff-head-split">
         <h2 class="ff-h2"><span class="thin">How the</span><br>12 weeks run</h2>
-        <p class="ff-note">Three blocks, each one building on the last, with Dallas checking in every single week.</p>
+        <p class="ff-note">Three blocks, each one building on the last.</p>
       </div>
       <div class="ff-steps">
 {ph}
@@ -159,13 +159,14 @@ def page(slug, g):
     <div class="ff-shell">
       <div class="ff-next">
         <div>
-          <h2 class="ff-h2"><span class="thin">What happens</span><br>now</h2>
-          <p>Dallas's team has your answers. Keep your phone close: we'll be in touch shortly to go through your goal and get your 12 weeks started.</p>
+          <h2 class="ff-h2"><span class="thin">Start your</span><br>12 weeks today</h2>
+          <p>Everything above, ready the moment you check out. One payment, no subscription.</p>
+          <p class="ff-h2" id="ffPrice" style="margin-top:1.4rem"></p>
         </div>
         <div class="ff-next-actions">
-          <a class="ff-btn ff-btn-white" id="ffBook" href="#" target="_blank" rel="noopener">Book Your Call</a>
-          <a class="ff-btn ff-wa" id="ffWhatsApp" href="#" target="_blank" rel="noopener">{WA}Message on WhatsApp</a>
-          <p class="ff-next-note">We'll reach out on the number you gave us.</p>
+          <a class="ff-btn ff-btn-white" id="ffBuy" href="#" target="_blank" rel="noopener">Get The Program</a>
+          <a class="ff-btn ff-wa" id="ffWhatsApp" href="#" target="_blank" rel="noopener">{WA}Questions? WhatsApp Dallas</a>
+          <p class="ff-next-note" id="ffBuyNote">Secure checkout. Instant access.</p>
         </div>
       </div>
     </div>
@@ -193,30 +194,37 @@ def page(slug, g):
 (function () {{
   "use strict";
 
-  /* Set these in scripts/build_goals.py and rebuild. */
-  var FF_BOOKING = {json.dumps(BOOKING)};
-  var FF_WHATSAPP = {json.dumps(WHATSAPP)};
+  var CFG = window.FF_CONFIG || {{}};
+  var SLUG = {json.dumps(slug)};
   var FF_PROGRAM = {json.dumps(g["name"])};
+  var buyUrl = (CFG.checkout || {{}})[SLUG] || '';
+  var price = (CFG.price || {{}})[SLUG] || '';
 
   document.querySelectorAll('.ff-year').forEach(function (el) {{ el.textContent = new Date().getFullYear(); }});
 
   var name = (new URLSearchParams(window.location.search).get('name') || '').replace(/[^\\p{{L}}' -]/gu, '').trim().slice(0, 40);
-  if (name) document.getElementById('ffHello').textContent = 'You\\'re in, ' + name + '. Your details are with Dallas\\'s team.';
+  if (name) document.getElementById('ffHello').textContent = 'Thanks, ' + name + ". Here's your match.";
 
-  var book = document.getElementById('ffBook');
-  if (FF_BOOKING) book.href = FF_BOOKING; else book.remove();
+  var priceEl = document.getElementById('ffPrice');
+  if (price) priceEl.textContent = price; else priceEl.remove();
 
-  var wa = document.getElementById('ffWhatsApp');
-  if (FF_WHATSAPP) {{
-    var note = 'Hi Dallas, ' + (name ? 'it\\'s ' + name + '. ' : '') + 'I just did the quiz on your website and I\\'m interested in the 12-week custom ' + FF_PROGRAM.toLowerCase() + ' program.';
-    wa.href = 'https://wa.me/' + FF_WHATSAPP.replace(/[^0-9]/g, '') + '?text=' + encodeURIComponent(note);
+  /* Until a checkout link is set, the buy buttons are hidden and the
+     panel points people to WhatsApp instead. */
+  var buy = document.getElementById('ffBuy');
+  if (buyUrl) {{
+    buy.href = buyUrl;
+    document.querySelectorAll('a[href="#next"]').forEach(function (a) {{ a.href = buyUrl; a.target = '_blank'; a.rel = 'noopener'; }});
   }} else {{
-    wa.remove();
+    buy.remove();
+    document.getElementById('ffBuyNote').textContent = "Checkout opens soon. We'll be in touch on the number you gave us.";
   }}
 
-  if (!FF_BOOKING && !FF_WHATSAPP) {{
-    document.querySelector('.ff-next-actions').remove();
-    document.querySelector('.ff-next').style.gridTemplateColumns = 'minmax(0, 1fr)';
+  var wa = document.getElementById('ffWhatsApp');
+  if (CFG.whatsapp) {{
+    var note = 'Hi Dallas, ' + (name ? "it's " + name + '. ' : '') + 'I just did the quiz on your website and I have a question about the 12-week ' + FF_PROGRAM.toLowerCase() + ' program.';
+    wa.href = 'https://wa.me/' + CFG.whatsapp.replace(/[^0-9]/g, '') + '?text=' + encodeURIComponent(note);
+  }} else {{
+    wa.remove();
   }}
 }})();
 </script>

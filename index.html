@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
+<script src="js/config.js"></script>
 </head>
 <body>
 <div id="ff-page">
@@ -235,7 +236,7 @@
         </div>
         <div class="ff-faq-item">
           <button class="ff-faq-q" type="button"><span class="ff-faq-n">04</span><span class="t">How much does it cost?</span><span class="ff-faq-ico">+</span></button>
-          <div class="ff-faq-a"><p>It depends on the program and the level of support you need. Take the quiz and we'll walk you through the options for your goal.</p></div>
+          <div class="ff-faq-a"><p>There's an option for every budget, from a one-off 12-week program to full one-to-one coaching. Take the quiz and we'll point you at the right one for your goal.</p></div>
         </div>
         <div class="ff-faq-item">
           <button class="ff-faq-q" type="button"><span class="ff-faq-n">05</span><span class="t">Do I need to want to compete for Men's Physique?</span><span class="ff-faq-ico">+</span></button>
@@ -310,18 +311,18 @@
         </div>
 
         <div class="ff-quiz-step" data-step="4" data-key="Monthly budget">
-          <p class="ff-quiz-q">What's your monthly budget for coaching?</p>
-          <p class="ff-quiz-hint">This helps us point you to the right option.</p>
+          <p class="ff-quiz-q">How much are you looking to invest each month?</p>
+          <p class="ff-quiz-hint">This helps us point you to the right option for you.</p>
           <div class="ff-quiz-opts">
-            <button type="button" class="ff-quiz-opt" data-value="Under $250 a month">Under $250 a month</button>
-            <button type="button" class="ff-quiz-opt" data-value="$250 to $500 a month">$250 to $500 a month</button>
-            <button type="button" class="ff-quiz-opt" data-value="$500+ a month">$500+ a month</button>
+            <button type="button" class="ff-quiz-opt" data-value="Under $100 a month" data-tier="program">Under $100 a month</button>
+            <button type="button" class="ff-quiz-opt" data-value="$150+ a month" data-tier="coaching">$150+ a month</button>
+            <button type="button" class="ff-quiz-opt" data-value="$200+ a month" data-tier="coaching">$200+ a month</button>
           </div>
           <button type="button" class="ff-quiz-back">&#8592; Back</button>
         </div>
 
         <div class="ff-quiz-step" data-step="5">
-          <p class="ff-quiz-q">Where should we send your program?</p>
+          <p class="ff-quiz-q">Last step. Where can we reach you?</p>
           <p class="ff-quiz-hint" id="ffRecap"></p>
           <form id="ffForm" novalidate>
             <div class="ff-field"><label for="ffName">Full name</label><input id="ffName" name="name" type="text" placeholder="Jordan Smith" autocomplete="name" required></div>
@@ -331,7 +332,7 @@
             </div>
             <div class="ff-field"><label for="ffInsta">Instagram <span class="ff-opt">optional</span></label><input id="ffInsta" name="instagram" type="text" placeholder="@yourhandle" autocomplete="off"></div>
             <input type="text" name="_gotcha" id="ffGotcha" class="ff-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <button type="submit" class="ff-btn ff-btn-solid ff-go">See My Program</button>
+            <button type="submit" class="ff-btn ff-btn-solid ff-go">See My Results</button>
             <p class="ff-small" id="ffMsg">No spam, ever. Your details only go to Dallas's team.</p>
           </form>
           <button type="button" class="ff-quiz-back">&#8592; Back</button>
@@ -374,18 +375,17 @@
      SETTINGS
      ================================================================== */
 
-  /* The REPS dashboard form endpoint. Leads land under the client whose
-     slug matches FF_CLIENT. Left empty, the quiz still runs and sends
-     people to their goal page, but saves nothing. */
-  var FF_LEADS_ENDPOINT = "https://dashboard.jolly-heart-2b8d.workers.dev/api/forms";
-  var FF_CLIENT = "finalform";
+  /* Links, numbers and the dashboard settings live in js/config.js. */
+  var CFG = window.FF_CONFIG || {};
 
-  /* Where each goal sends people once they've finished the quiz. */
+  /* Under $100: the one-off program page for their goal.
+     $150+ or $200+: the book-a-call page. */
   var FF_GOAL_PAGES = {
     "fat-loss":      "fat-loss.html",
     "build-muscle":  "build-muscle.html",
     "mens-physique": "mens-physique.html"
   };
+  var FF_CALL_PAGE = "book-call.html";
 
   /* ================================================================== */
 
@@ -416,6 +416,7 @@
   var count = document.getElementById('ffCount');
   var answers = {};
   var goal = '';
+  var tier = '';
   var current = 1;
 
   function show(n) {
@@ -436,6 +437,7 @@
     opt.classList.add('on');
     answers[step.getAttribute('data-key')] = opt.getAttribute('data-value');
     if (opt.hasAttribute('data-goal')) goal = opt.getAttribute('data-goal');
+    if (opt.hasAttribute('data-tier')) tier = opt.getAttribute('data-tier');
     setTimeout(function () { show(parseInt(step.getAttribute('data-step'), 10) + 1); }, 160);
   }
 
@@ -458,15 +460,19 @@
   function goodEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
   function digits(v) { return v.replace(/[^0-9]/g, ''); }
 
-  function goTo(name) {
-    var page = FF_GOAL_PAGES[goal] || FF_GOAL_PAGES['build-muscle'];
+  function goTo(name, email) {
+    var page = tier === 'program' ? (FF_GOAL_PAGES[goal] || FF_GOAL_PAGES['build-muscle']) : FF_CALL_PAGE;
+    /* The call page pre-fills Calendly with these, so nobody types them twice. */
+    try {
+      sessionStorage.setItem('ff_lead', JSON.stringify({ name: name || '', email: email || '', goal: answers.Goal || '' }));
+    } catch (err) {}
     var first = (name || '').split(/\s+/)[0];
     window.location.href = page + (first ? '?name=' + encodeURIComponent(first) : '');
   }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (val('ffGotcha')) { goTo(''); return; }
+    if (val('ffGotcha')) { goTo('', ''); return; }
 
     var name = val('ffName'), email = val('ffEmail'), phone = val('ffPhone'), insta = val('ffInsta');
     var msg = document.getElementById('ffMsg');
@@ -486,19 +492,20 @@
     var payloadAnswers = {};
     Object.keys(answers).forEach(function (k) { payloadAnswers[k] = answers[k]; });
     if (insta) payloadAnswers.Instagram = insta;
+    payloadAnswers['Sent to'] = tier === 'program' ? 'One-off 12-week program' : 'Book a call';
 
-    if (!FF_LEADS_ENDPOINT) { goTo(name); return; }
+    if (!CFG.leadsEndpoint) { goTo(name, email); return; }
 
     /* Don't keep anyone waiting on a slow network: move on after 4 seconds either way. */
     var done = false;
-    function next() { if (!done) { done = true; goTo(name); } }
+    function next() { if (!done) { done = true; goTo(name, email); } }
     setTimeout(next, 4000);
 
-    fetch(FF_LEADS_ENDPOINT, {
+    fetch(CFG.leadsEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        client: FF_CLIENT,
+        client: CFG.client,
         name: name,
         email: email.toLowerCase(),
         phone: phone,
