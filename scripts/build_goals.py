@@ -1,0 +1,231 @@
+"""Builds the three goal pages (the thank-you pages people land on after the quiz).
+
+Edit the copy in GOALS below, then run from the repo root:
+    python3 scripts/build_goals.py
+"""
+import html, json, os
+
+# Same on all three pages. Left empty, that button is hidden.
+BOOKING = ""   # e.g. a Calendly link for a call with the team
+WHATSAPP = ""  # digits only with country code, e.g. 15551234567
+
+GOALS = {
+  "fat-loss": {
+    "name": "Fat Loss",
+    "photo": "kb-overhead.webp",
+    "photo_alt": "Dallas pressing a kettlebell overhead",
+    "photo_pos": "50% 30%",
+    "lead": "Built to strip body fat while holding on to the muscle you've worked for, so the effort you're putting in finally shows.",
+    "includes": [
+      ("Custom training plan", "Written to keep your muscle while you lean out, around your schedule and your gym."),
+      ("Custom nutrition and macros", "A deficit you can actually live with. No starving, no cutting out everything you enjoy."),
+      ("Weekly check-ins with Dallas", "Your weight, photos and feedback reviewed every week, so nothing drifts."),
+      ("Steps and cardio set for you", "Exactly how much to do and when, so you're not guessing on the treadmill."),
+      ("Adjustments when progress stalls", "Plateaus get handled the same week, based on your real numbers."),
+      ("Direct access to Dallas", "Questions answered by the person writing your plan."),
+    ],
+    "phases": [
+      ("Weeks 1 to 4", "Set the foundation", "Nutrition dialled in, training baseline set and the daily habits that make fat loss stick."),
+      ("Weeks 5 to 8", "Push the drop", "The deficit tightened where it's needed while training keeps progressing, so the scale and the mirror both move."),
+      ("Weeks 9 to 12", "Reveal it", "The final push for definition, then a plan to keep the results once the 12 weeks are done."),
+    ],
+  },
+  "build-muscle": {
+    "name": "Build Muscle",
+    "photo": "pushdown.webp",
+    "photo_alt": "Dallas doing a cable pushdown",
+    "photo_pos": "50% 25%",
+    "lead": "Built to add real size, with training that progresses every week and food that fuels the growth instead of just adding fat.",
+    "includes": [
+      ("Custom hypertrophy training", "Programmed around your body, your weak points and the equipment you have."),
+      ("Nutrition built for growth", "A surplus that adds muscle, not just weight, with macros set for you."),
+      ("Weekly check-ins with Dallas", "Your lifts, weight and photos reviewed every week and the plan moved forward."),
+      ("Progressive overload, tracked", "Every session builds on the last, so you're always heading somewhere."),
+      ("Weak-point focus", "Lagging body parts brought up, so the whole physique grows in proportion."),
+      ("Direct access to Dallas", "Questions answered by the person writing your plan."),
+    ],
+    "phases": [
+      ("Weeks 1 to 4", "Build the base", "Technique tightened, baseline lifts set and eating to grow without overdoing it."),
+      ("Weeks 5 to 8", "Progress", "Volume and load climb week to week, and your food adjusts as your bodyweight moves."),
+      ("Weeks 9 to 12", "Push", "A peak block to drive the biggest gains of the program, then a plan for what comes next."),
+    ],
+  },
+  "mens-physique": {
+    "name": "Men's Physique",
+    "photo": "hero-studio.webp",
+    "photo_alt": "Dallas Botchway, studio shot on black",
+    "photo_pos": "50% 15%",
+    "lead": "Built around the look the division rewards: wide shoulders, a tight waist and conditioning that holds up. Coached by a pro who's won on that stage.",
+    "includes": [
+      ("Physique-focused training", "Shoulders, lats and the V-taper prioritised, without neglecting the rest."),
+      ("Nutrition for lean mass", "Macros set to build the right muscle while keeping you sharp and conditioned."),
+      ("Weekly check-ins with photo review", "Dallas looks at your physique every week the way a judge would."),
+      ("Weak-point programming", "Whatever's holding your look back gets brought up first."),
+      ("Stage guidance if you're competing", "Want to step on stage? You're learning from someone who's won there."),
+      ("Direct access to Dallas", "Questions answered by an IFBB Pro, not a support inbox."),
+    ],
+    "phases": [
+      ("Weeks 1 to 4", "Assess and build", "Your weak points identified, your baseline set and your nutrition dialled in."),
+      ("Weeks 5 to 8", "Shape", "V-taper focus, with conditioning ramping up as the physique comes together."),
+      ("Weeks 9 to 12", "Sharpen", "Conditioning and presentation sharpened, with clear next steps on or off the stage."),
+    ],
+  },
+}
+
+TICK = '<span class="ff-tick"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 6.2 4.4 9 10.4 3"/></svg></span>'
+WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>'
+
+e = html.escape
+
+def page(slug, g):
+    title = f"Your 12-Week {g['name']} Program"
+    inc = "\n".join(f'          <li>{TICK}<div><b>{e(a)}</b><span class="t">{e(b)}</span></div></li>' for a, b in g["includes"])
+    ph = "\n".join(f'''        <div class="ff-step">
+          <div class="ff-step-n">{i+1:02d}</div>
+          <p class="ff-micro" style="margin-bottom:.5rem">{e(w)}</p>
+          <h3 class="ff-h3">{e(t)}</h3>
+          <p>{e(d)}</p>
+        </div>''' for i, (w, t, d) in enumerate(g["phases"]))
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{e(title)} | Final Form Physique</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<!-- Generated by scripts/build_goals.py. Edit the copy there, not here. -->
+<div id="ff-page">
+
+  <div class="ff-nav-wrap">
+    <nav class="ff-nav">
+      <a href="index.html" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form</span></a>
+      <a href="#next" class="ff-btn ff-btn-solid ff-btn-sm">Next Step</a>
+    </nav>
+  </div>
+
+  <header class="ff-hero ff-ty-hero">
+    <div class="ff-shell ff-hero-grid">
+      <div>
+        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">You're in. Your details are with Dallas's team.</p>
+        <h1 class="ff-h1"><span class="thin">This is</span><br><span class="red">for you.</span></h1>
+        <p class="ff-h3" style="margin:1.4rem 0 1rem">{e(title.replace("Your ", "The "))}</p>
+        <p class="ff-lead" style="margin-bottom:2.2rem">{e(g["lead"])}</p>
+        <div class="ff-hero-btns">
+          <a href="#next" class="ff-btn ff-btn-solid">See What Happens Next</a>
+          <a href="#included" class="ff-btn ff-btn-line">What's Included &#8595;</a>
+        </div>
+      </div>
+      <div class="ff-hero-photo">
+        <img src="images/photos/{g["photo"]}" alt="{e(g["photo_alt"])}" style="object-position:{g["photo_pos"]}">
+        <div class="ff-hero-badge"><b>12 Weeks</b>Custom {e(g["name"])}</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="ff-sec ff-sec-alt" id="included">
+    <div class="ff-shell">
+      <div class="ff-head-split">
+        <h2 class="ff-h2"><span class="thin">What's in your</span><br>12 weeks</h2>
+        <p class="ff-note">Everything is built for you from scratch and run one to one by Dallas.</p>
+      </div>
+      <ul class="ff-includes">
+{inc}
+      </ul>
+    </div>
+  </section>
+
+  <section class="ff-sec">
+    <div class="ff-shell">
+      <div class="ff-head-split">
+        <h2 class="ff-h2"><span class="thin">How the</span><br>12 weeks run</h2>
+        <p class="ff-note">Three blocks, each one building on the last, with Dallas checking in every single week.</p>
+      </div>
+      <div class="ff-steps">
+{ph}
+      </div>
+    </div>
+  </section>
+
+  <section class="ff-sec" id="next" style="padding-top:0">
+    <div class="ff-shell">
+      <div class="ff-next">
+        <div>
+          <h2 class="ff-h2"><span class="thin">What happens</span><br>now</h2>
+          <p>Dallas's team has your answers. Keep your phone close: we'll be in touch shortly to go through your goal and get your 12 weeks started.</p>
+        </div>
+        <div class="ff-next-actions">
+          <a class="ff-btn ff-btn-white" id="ffBook" href="#" target="_blank" rel="noopener">Book Your Call</a>
+          <a class="ff-btn ff-wa" id="ffWhatsApp" href="#" target="_blank" rel="noopener">{WA}Message on WhatsApp</a>
+          <p class="ff-next-note">We'll reach out on the number you gave us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ff-shell">
+      <div class="ff-foot-top">
+        <div>
+          <a href="index.html" class="ff-brand"><img src="images/logo-mark.png" alt="Final Form Physique"><span>Final Form Physique</span></a>
+          <p>Transforming your physique to its final form. One-to-one coaching with IFBB Pro Dallas Botchway.</p>
+        </div>
+      </div>
+      <div class="ff-wordmark">Final Form</div>
+      <div class="ff-foot-bottom">
+        <span>&copy; <span class="ff-year">2026</span> Final Form Physique. All rights reserved.</span>
+        <span>Built for the ones who put the work in.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {{
+  "use strict";
+
+  /* Set these in scripts/build_goals.py and rebuild. */
+  var FF_BOOKING = {json.dumps(BOOKING)};
+  var FF_WHATSAPP = {json.dumps(WHATSAPP)};
+  var FF_PROGRAM = {json.dumps(g["name"])};
+
+  document.querySelectorAll('.ff-year').forEach(function (el) {{ el.textContent = new Date().getFullYear(); }});
+
+  var name = (new URLSearchParams(window.location.search).get('name') || '').replace(/[^\\p{{L}}' -]/gu, '').trim().slice(0, 40);
+  if (name) document.getElementById('ffHello').textContent = 'You\\'re in, ' + name + '. Your details are with Dallas\\'s team.';
+
+  var book = document.getElementById('ffBook');
+  if (FF_BOOKING) book.href = FF_BOOKING; else book.remove();
+
+  var wa = document.getElementById('ffWhatsApp');
+  if (FF_WHATSAPP) {{
+    var note = 'Hi Dallas, ' + (name ? 'it\\'s ' + name + '. ' : '') + 'I just did the quiz on your website and I\\'m interested in the 12-week custom ' + FF_PROGRAM.toLowerCase() + ' program.';
+    wa.href = 'https://wa.me/' + FF_WHATSAPP.replace(/[^0-9]/g, '') + '?text=' + encodeURIComponent(note);
+  }} else {{
+    wa.remove();
+  }}
+
+  if (!FF_BOOKING && !FF_WHATSAPP) {{
+    document.querySelector('.ff-next-actions').remove();
+    document.querySelector('.ff-next').style.gridTemplateColumns = 'minmax(0, 1fr)';
+  }}
+}})();
+</script>
+</body>
+</html>
+'''
+
+root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+for slug, g in GOALS.items():
+    with open(os.path.join(root, slug + ".html"), "w") as f:
+        f.write(page(slug, g))
+    print("wrote", slug + ".html")

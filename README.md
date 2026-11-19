@@ -1,31 +1,39 @@
 # Final Form Physique
 
-Landing page for Dallas Botchway's Final Form Physique app. Same layout and sections as the Physique X page, rebranded in the FF logo colours (black, white and red #BD3C2C).
+One-to-one coaching site for Dallas Botchway, with a quiz funnel that sends each lead to a goal page. Static site, no build step for the homepage.
 
-Static site, no build step. Open `index.html` and it runs.
+## Pages
 
-## Files
-
-| Path | What it is |
+| Page | What it is |
 | --- | --- |
-| `index.html` | The whole page: styles, content and script |
-| `images/photos/` | Dallas's photos |
-| `images/app/` | App screenshots. **Placeholders** borrowed from other clients' builds until Dallas's own screens are ready. Swap them in with the same file names (440 x 956) |
-| `images/logo-mark.png` | The FF mark on a transparent background (nav and footer) |
-| `images/favicon.png`, `apple-touch-icon.png`, `app-icon.png` | Icons from the app icon |
-| `wrangler.jsonc` | Cloudflare settings, for deploying as static assets |
-| `.nojekyll` | Lets GitHub Pages serve the files as they are |
+| `index.html` | Homepage: one-to-one coaching, the three programs, how it works, Meet Dallas, FAQ and the quiz |
+| `fat-loss.html` | Where the quiz sends people who pick **Fat loss**: the 12-week custom fat loss program |
+| `build-muscle.html` | Same for **Build muscle** |
+| `mens-physique.html` | Same for **Men's physique** |
+| `css/site.css` | Styles shared by all four pages |
+| `images/` | Dallas's photos, the FF mark and the icons |
 
-## Still to fill in
+## The quiz
 
-All the settings live at the top of the `<script>` block at the bottom of `index.html`:
+Five steps: goal, training experience, when they want to start, monthly budget, then name, email, phone and Instagram (optional).
+Clicking a program card on the homepage starts the quiz with that goal already picked.
 
-- `FF_CHECKOUT`: checkout links for the monthly, 3 month and annual plans. Until set, the plan buttons scroll to the quiz.
-- `FF_WHATSAPP`: Dallas's number, digits only with country code. Until set, the WhatsApp button is hidden.
-- `FF_INSTAGRAM`: his profile URL. Until set, the footer link is hidden.
-- `FF_CLIENT`: the client slug in the REPS dashboard (currently `finalform`). Quiz leads post to the dashboard's `/api/forms` under this slug, so it needs to match his account there.
+On submit the lead posts to the REPS dashboard (`FF_LEADS_ENDPOINT`, client `FF_CLIENT = "finalform"`) with every answer attached, then the person lands on their goal page with their first name in the URL so the page greets them.
+`FF_CLIENT` has to match Dallas's client slug in the dashboard. Both settings are at the top of the script in `index.html`.
 
-Also placeholders:
+## The goal pages
 
-- **Prices** ($19.99 / $49.99 / $149.99) in the pricing section and the quiz result. Search for `PLACEHOLDER PRICES`.
-- **App screenshots** in `images/app/`.
+These are generated. Edit the copy in `scripts/build_goals.py`, then run:
+
+    python3 scripts/build_goals.py
+
+Settings at the top of that file:
+
+- `BOOKING`: a call booking link (e.g. Calendly). Empty hides the button.
+- `WHATSAPP`: Dallas's number, digits only with country code. Empty hides the button.
+
+With both empty, the "What happens now" panel just tells them the team will be in touch.
+
+## Hosting
+
+`wrangler.jsonc` deploys the folder as static assets on Cloudflare. `.nojekyll` lets GitHub Pages serve it as is.
