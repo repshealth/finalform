@@ -27,7 +27,7 @@
   <header class="ff-hero" id="book">
     <div class="ff-shell ff-book-grid" style="padding-bottom:90px">
       <div class="ff-book-copy">
-        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for your answers.</p>
+        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for applying.</p>
         <h1 class="ff-h1"><span class="thin">Good news.</span><br>We can <span class="red">help.</span></h1>
         <p class="ff-lead">Based on your answers, you're a great fit for one-to-one coaching with Dallas. Book your call now to talk through your goal and how we'd get you there.</p>
         <ul class="ff-list">
@@ -82,7 +82,7 @@
   var name = (new URLSearchParams(window.location.search).get('name') || (lead.name || '').split(/\s+/)[0] || '')
     .replace(/[^\p{L}' -]/gu, '').trim().slice(0, 40);
 
-  if (name) document.getElementById('ffHello').textContent = 'Thanks, ' + name + '.';
+  if (name) document.getElementById('ffHello').textContent = 'Thanks for applying, ' + name + '.';
 
   var calBox = document.getElementById('ffCal');
   if (!CFG.calendly) {

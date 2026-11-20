@@ -1,12 +1,12 @@
 # Final Form Physique
 
-One-to-one coaching site for Dallas Botchway, with a quiz funnel. Static site, no build step for the main pages.
+One-to-one coaching site for Dallas Botchway. The whole page leads to one thing: an application for one-to-one coaching. Static site, no build step for the main pages.
 
 ## The funnel
 
-The quiz on `index.html` asks: goal, training experience, when they want to start, budget, then name, email, phone and Instagram (optional). Every answer is saved to the REPS dashboard as a lead, tagged with where the person was sent.
+The application on `index.html` asks: goal, training experience, when they want to start, budget, then name, email, phone and Instagram (optional). Every answer is saved to the REPS dashboard as a lead, tagged with where the person was sent.
 
-Where they go depends on budget and goal:
+The budget answer decides whether they can afford coaching. If they can, they book a call. If not, they're offered the one-off 12-week program for their goal instead:
 
 | Budget | Goal | Lands on |
 | --- | --- | --- |

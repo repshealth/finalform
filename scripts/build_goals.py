@@ -115,9 +115,10 @@ def page(slug, g):
   <header class="ff-hero ff-ty-hero">
     <div class="ff-shell ff-hero-grid">
       <div>
-        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for your answers. Here's your match.</p>
+        <p class="ff-lead" id="ffHello" style="margin-bottom:1.2rem;color:#fff;font-weight:600">Thanks for applying.</p>
         <h1 class="ff-h1"><span class="thin">This is</span><br><span class="red">for you.</span></h1>
-        <p class="ff-h3" style="margin:1.4rem 0 1rem">{e(title.replace("Your ", "The "))}</p>
+        <p class="ff-lead" style="margin:1.4rem 0 1.2rem">One-to-one coaching isn't the right fit for your budget right now. So here's the next best thing: Dallas's plan for your goal, at a fraction of the cost of coaching.</p>
+        <p class="ff-h3" style="margin:0 0 1rem">{e(title.replace("Your ", "The "))}</p>
         <p class="ff-lead" style="margin-bottom:2.2rem">{e(g["lead"])}</p>
         <div class="ff-hero-btns">
           <a href="#next" class="ff-btn ff-btn-solid">Get The Program</a>
@@ -160,7 +161,7 @@ def page(slug, g):
       <div class="ff-next">
         <div>
           <h2 class="ff-h2"><span class="thin">Start your</span><br>12 weeks today</h2>
-          <p>Everything above, ready the moment you check out. One payment, no subscription.</p>
+          <p>Everything above, ready the moment you check out. One payment, no subscription. When you're ready for one-to-one coaching, you can apply again any time.</p>
           <p class="ff-h2" id="ffPrice" style="margin-top:1.4rem"></p>
         </div>
         <div class="ff-next-actions">
@@ -203,7 +204,7 @@ def page(slug, g):
   document.querySelectorAll('.ff-year').forEach(function (el) {{ el.textContent = new Date().getFullYear(); }});
 
   var name = (new URLSearchParams(window.location.search).get('name') || '').replace(/[^\\p{{L}}' -]/gu, '').trim().slice(0, 40);
-  if (name) document.getElementById('ffHello').textContent = 'Thanks, ' + name + ". Here's your match.";
+  if (name) document.getElementById('ffHello').textContent = 'Thanks for applying, ' + name + '.';
 
   var priceEl = document.getElementById('ffPrice');
   if (price) priceEl.textContent = price; else priceEl.remove();
